@@ -41,12 +41,12 @@ data = []
 keywordsList = [
     ['funciones y deberes'], 
     ['organigrama'], 
-    ['directorio institucional'],
+    ['directorio institucional','directorio de entidades'],
     ['información de servidores públicos', 'directorio de servidores públicos'],
     ['servicio al público, normas, formularios y protocolos de atención'],
-    ['procedimientos que se siguen para tomar decisiones'],
+    ['procedimientos que se siguen para tomar decisiones', 'procesos y procedimientos'],
     ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],
-    ['autoridades que lo vigilan'],
+    ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad'],
     ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes']
     # ['presupuesto general'],
     # [ 'histórica anual', 'ejecución presupuestal'],
@@ -111,7 +111,7 @@ amountUrls = 100
 urls = urls[baseRef:baseRef+amountUrls] # 100 a 200
 # print(urls)
 listNotExist = [1035, 1036, 1042]
-urls = ['http://www.altobaudo-choco.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
+urls = ['http://www.zapatoca-santander.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
 for url in urls:
     dataByUrl["keywords"] = []
     dataByUrl["Existe"] = []  
@@ -131,8 +131,11 @@ for url in urls:
     for obj in objects:
         for item in accordionItems:
             if wordExists(obj.keyword, item):
-                link = item.select_one("a")
-                hrefLink = url+link.get("href")
+                link = item.select_one("a").get("href")
+                if ("http") in link:
+                    hrefLink = link
+                else:
+                    hrefLink = url+link
 
           
                 browser.get(hrefLink)
