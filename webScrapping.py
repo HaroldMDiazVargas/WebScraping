@@ -71,9 +71,9 @@ dataByUrl = {
     'keywords':keywords, #'información de servidores'
     "Existe": [],
     "url": [],
-    "Titulo":[]
-    "info":[], 
-    "ultMod": []
+    "Titulo":[],
+    "Info":[], 
+    "UltimaModif": []
 }  
 
 
@@ -117,7 +117,7 @@ for url in urls:
     dataByUrl["Existe"] = []  
     dataByUrl["url"] = []
     dataByUrl["Titulo"] = []
-    dataByUrl["info"] = []
+    dataByUrl["Info"] = []
     dataByUrl["UltimaModif"]= []
     print(f"URL = {url}")
     print(f"Index url {baseRef}")
@@ -152,10 +152,10 @@ for url in urls:
 
                 break
     print(dataByUrl)
-    # tupla = list(dataByUrl.items())
-    # data.append(tupla)
+    tupla = list(dataByUrl.items())
+    data.append(tupla)
 
 # print(data)
-# arrayData, columns = convertToArray(data, dataByUrl, keywords)
-# exportXlsx(arrayData,columns ) # 3rd arg optional => Filename.xlsx
-# browser.quit()
+arrayData, columns = convertToArray(data, dataByUrl)
+exportXlsx(arrayData,columns ) # 3rd arg optional => Filename.xlsx
+browser.quit()

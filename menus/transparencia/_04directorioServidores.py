@@ -13,7 +13,7 @@ class DirectorioServidores(abstractBase.Requisites):
         elif(soup.select_one(".section-tit")):
             date = "-"
             title = soup.select_one(".section-tit").getText()
-            info = soup.select_one(".content-descri").getText()
+            info = soup.select_one(".content-descri").getText()[:self.maxCharacters]
             onPage = True
 
         # if (soup.select_one(".content_text")):

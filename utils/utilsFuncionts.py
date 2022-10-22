@@ -11,9 +11,9 @@ def wordExists(word, item):
         return word[0] in item.string.lower()
 
 
-def convertToArray(data, dataByUrl, keywords):
-    arrayData = np.empty((len(keywords), len(dataByUrl)), dtype=object)
-    arrayDynamic = np.empty((len(keywords), len(dataByUrl)), dtype=object)
+def convertToArray(data, dataByUrl):
+    arrayData = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
+    arrayDynamic = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
 
     count = 0
     for urlData in data:
