@@ -2,14 +2,15 @@
 # pylint: disable=E1121
 
  
-from items.organigram import Organigram
-from items.duties import Duties
-from items.generalBudget import GeneralBudget
-from items.anualHistoric import AnualHistoric 
-from items.functionariesDirectory import ServersDirectory
-from items.anualBuyPlan import AnualBuyPlan
-from items.contractExecution import ContractExecution
-from items.normativity import Normativity
+ 
+from menus.transparencia._01funcionesydeberes import Duties
+from menus.transparencia._02organigrama import Organigram 
+from menus.transparencia._04directorioServidores import ServersDirectory
+# from menus.transparencia.generalBudget import GeneralBudget 
+# from menus.transparencia.anualHistoric import AnualHistoric 
+# from menus.transparencia.anualBuyPlan import AnualBuyPlan
+# from menus.transparencia.contractExecution import ContractExecution
+# from menus.transparencia.normativity import Normativity
 from utils.utilsFuncionts import *
 
 
@@ -32,14 +33,21 @@ with open("websites.csv", 'r') as file:
  
 data = []
 keywordsList = [
-    ['organigrama'], 
     ['funciones y deberes'], 
-    ['presupuesto general'],
-    [ 'histórica anual', 'ejecución presupuestal'],
-    [ 'información de servidores', 'directorio de servidores públicos'],
-    ['plan anual de adquisiciones'],
-    [ 'ejecución de contratos'],
-    [ 'normatividad']
+    ['organigrama'], 
+    ['directorio institucional'],
+    [ 'información de servidores públicos', 'directorio de servidores públicos'],
+    ['servicio al público, normas, formularios y protocolos de atención'],
+    ['procedimientos que se siguen para tomar decisiones'],
+    ['decisiones que pueden afectar al público'],
+    ['autoridades que vigilan'],
+    ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes']
+    # ['presupuesto general'],
+    # [ 'histórica anual', 'ejecución presupuestal'],
+    # [ 'información de servidores', 'directorio de servidores públicos'],
+    # ['plan anual de adquisiciones'],
+    # [ 'ejecución de contratos'],
+    # [ 'normatividad']
 
 ]
 keywords = [
@@ -72,16 +80,18 @@ dataByUrl = {
 # obj__contractExec = ContractExecution(keywords[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywords[7], MAX_CHARACTERS)
 
-obj__organigram = Organigram(keywordsList[0], MAX_CHARACTERS)
 obj__duties = Duties(keywordsList[1], MAX_CHARACTERS)
-obj__generalBudget = GeneralBudget(keywordsList[2], MAX_CHARACTERS)
-obj__anualHistoric = AnualHistoric(keywordsList[3], MAX_CHARACTERS)
+obj__organigram = Organigram(keywordsList[0], MAX_CHARACTERS)
 obj__serverDirectory = ServersDirectory(keywordsList[4], MAX_CHARACTERS)
-obj__anualBuyPlan = AnualBuyPlan(keywordsList[5], MAX_CHARACTERS)
-obj__contractExec = ContractExecution(keywordsList[6], MAX_CHARACTERS)
-obj__normativity = Normativity(keywordsList[7], MAX_CHARACTERS)
 
-objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
+# obj__generalBudget = GeneralBudget(keywordsList[2], MAX_CHARACTERS)
+# obj__anualHistoric = AnualHistoric(keywordsList[3], MAX_CHARACTERS)
+# obj__anualBuyPlan = AnualBuyPlan(keywordsList[5], MAX_CHARACTERS)
+# obj__contractExec = ContractExecution(keywordsList[6], MAX_CHARACTERS)
+# obj__normativity = Normativity(keywordsList[7], MAX_CHARACTERS)
+
+objects = [obj__duties, obj__organigram, ]
+# objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
 browser = webdriver.Chrome()
 baseRef = 1037
 amountUrls = 100
