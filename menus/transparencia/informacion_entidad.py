@@ -35,12 +35,16 @@ class Organigrama(abstractBase.Requisites):
             date = soup.select_one(".dateMc-wrap").select("span")[0].string[-19:]
             title = soup.select_one(".section-tit").getText()
             info = soup.select_one(".content-descri p").getText()[:self.maxCharacters]
-            onPage = True
+            if (soup.select_one("a[src*='organigrama']")):          #Imagen
+                onPage = True
+            elif(soup.select_one("p[ng-bind$='file.name']")):       #archivo
+                onPage = True
 
         # if (soup.select_one(".content_text")):
         #     budgetDate = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
         #     budgetInfo = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()[:self.maxCharacters]
         #     onPage = True
+        
         else:
             onPage = False
             date = "-"
@@ -51,10 +55,26 @@ class Organigrama(abstractBase.Requisites):
 
 # 03. Mapas y cartas descriptivas de los procesos
 class cartasDescriptivas(abstractBase.Requisites):
-
-    
     def checkRequisites(self, soup, browser):
+        if(soup.select_one(".content_text")):
+            date = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
+            # title = soup.select_one(".content_text").select_one(".content-tit span").getText()
+            title = soup.select_one(".content_text").select_one(".docu--tit").getText() #span before
+            info = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()[:self.maxCharacters]
+            onPage = True
 
+        elif(soup.select_one("p[ng-bind$='file.name']")):          #Existe algun archivo adjunto
+            date = soup.select_one(".dateMc-wrap").select("span")[0].string[-19:]
+            title = soup.select_one(".section-tit").getText()
+            info = soup.select_one("p[ng-bind$='file.name']").getText()
+            onPage = True
+        else:
+            onPage = False
+            date = "-"
+            title = "-"
+            info = "-"
+        # print(budgetDate)
+        return onPage, date, title, info, browser.current_url
 
 # 04. Directorio Institucional
 

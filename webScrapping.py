@@ -39,7 +39,7 @@ keywordsList = [
     # Seccion1. Información de la entidad
     ['funciones y deberes'],                                                                                                                                #01
     ['organigrama'],                                                                                                                                        #02 
-    ['mapas y cartas descriptivas de los procesos' ],                                                                                                       #03
+    ['mapas y cartas descriptivas de los procesos'],                                                                                                       #03
     ['directorio institucional'],                                                                                                                           #04
     ['información de servidores públicos', 'directorio de servidores públicos'],                                                                            #05
     ['directorio de entidades'],                                                                                                                            #06
@@ -127,23 +127,48 @@ dataByUrl = {
 # obj__contractExec = ContractExecution(keywords[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywords[7], MAX_CHARACTERS)
 
+# Información de la entidad
 obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
 obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
-obj__directorioInst = DirectorioInstitucional(keywordsList[2], MAX_CHARACTERS)
-obj__directorioServ = DirectorioServidores(keywordsList[3], MAX_CHARACTERS)
-obj__protocoloAtenc = ProtocolosAtencion(keywordsList[4], MAX_CHARACTERS)
-obj__procedimientoDec = ProcedimientosDecisiones(keywordsList[5], MAX_CHARACTERS)
-obj__decAfectacion = DecisionesAfectacion(keywordsList[6], MAX_CHARACTERS)
-obj__mecanismoVig = MecanismosVigilancia(keywordsList[7], MAX_CHARACTERS)
-obj__mecanismoPqrs = MecanismoPqrs(keywordsList[8], MAX_CHARACTERS)
+obj__cartas_descriptivas = cartasDescriptivas(keywordsList[2], MAX_CHARACTERS)
+obj__directorio_institucional = DirectorioInstitucional(keywordsList[3], MAX_CHARACTERS)
+obj__directorio_servidores = DirectorioServidores(keywordsList[4], MAX_CHARACTERS)
+obj__directorio_entidades = DirectorioEntidades(keywordsList[5], MAX_CHARACTERS)
+obj__directorio_agremiacion = DirectorioAgremiaciones(keywordsList[6], MAX_CHARACTERS)
+obj__procedimientos_decisiones = ProcedimientosDecisiones(keywordsList[7], MAX_CHARACTERS)
+obj__mecanismo_pqrs = MecanismoPqrs(keywordsList[8], MAX_CHARACTERS)
+obj__calendario_actividades = CalendarioActividades(keywordsList[9], MAX_CHARACTERS)
+obj__decisiones_afecta = DecisionesAfectacion(keywordsList[10], MAX_CHARACTERS)
+obj__mecanismo_vigilancia = MecanismosVigilancia(keywordsList[11], MAX_CHARACTERS)
+obj__publicacion_cv = PublicacionCV(keywordsList[12], MAX_CHARACTERS)
+obj__protocolo_atencion = ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
+
+# objects = [
+# Deberes(keywordsList[0], MAX_CHARACTERS),
+# Organigrama(keywordsList[1], MAX_CHARACTERS),
+# cartasDescriptivas(keywordsList[2], MAX_CHARACTERS),
+# DirectorioInstitucional(keywordsList[3], MAX_CHARACTERS),
+# DirectorioServidores(keywordsList[4], MAX_CHARACTERS),
+# DirectorioEntidades(keywordsList[5], MAX_CHARACTERS),
+# DirectorioAgremiaciones(keywordsList[6], MAX_CHARACTERS),
+# ProcedimientosDecisiones(keywordsList[7], MAX_CHARACTERS),
+# MecanismoPqrs(keywordsList[8], MAX_CHARACTERS),
+# CalendarioActividades(keywordsList[9], MAX_CHARACTERS),
+# DecisionesAfectacion(keywordsList[10], MAX_CHARACTERS),
+# MecanismosVigilancia(keywordsList[11], MAX_CHARACTERS),
+# PublicacionCV(keywordsList[12], MAX_CHARACTERS),
+# ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
+# ]
+
 
 # obj__generalBudget = GeneralBudget(keywordsList[2], MAX_CHARACTERS)
-# obj__anualHistoric = AnualHistoric(keywordsList[3], MAX_CHARACTERS)
+# obj__anualHistoric = AnualHistoric(keywordsList[3], MAX_CHARACTERS)|
 # obj__anualBuyPlan = AnualBuyPlan(keywordsList[5], MAX_CHARACTERS)
 # obj__contractExec = ContractExecution(keywordsList[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywordsList[7], MAX_CHARACTERS)
 
-objects = [obj__deberes, obj__organigrama, obj__directorioInst, obj__directorioServ, obj__protocoloAtenc, obj__procedimientoDec, obj__decAfectacion, obj__mecanismoVig, obj__mecanismoPqrs]
+objects = [obj__deberes, obj__organigrama, obj__cartas_descriptivas, obj__directorio_institucional, obj__directorio_servidores, obj__directorio_entidades, obj__directorio_agremiacion, obj__procedimientos_decisiones,
+        obj__mecanismo_pqrs,obj__calendario_actividades, obj__decisiones_afecta, obj__mecanismo_vigilancia,obj__publicacion_cv, obj__protocolo_atencion  ]
 # objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
 browser = webdriver.Chrome()
 baseRef = 1037
