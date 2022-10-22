@@ -2,21 +2,18 @@
 # pylint: disable=E1121
 
  
- 
-from menus.transparencia._01funcionesydeberes import Deberes
-from menus.transparencia._02organigrama import Organigrama
-from menus.transparencia._03directorioInstitucional import DirectorioInstitucional
-from menus.transparencia._04directorioServidores import DirectorioServidores
-from menus.transparencia._05protocolosDeAtención import ProtocoloAtencion
-from menus.transparencia._06procedimientosDecisiones import ProcedimientosDecisiones
-from menus.transparencia._07decisionesDeAfectacion import DecisionesAfectacion
-from menus.transparencia._08mecanismosVigilancia import MecanismosVigilancia
-from menus.transparencia._09mecanismoPqrs import MecanismoPqrs
-# from menus.transparencia.generalBudget import GeneralBudget 
-# from menus.transparencia.anualHistoric import AnualHistoric 
-# from menus.transparencia.anualBuyPlan import AnualBuyPlan
-# from menus.transparencia.contractExecution import ContractExecution
-# from menus.transparencia.normativity import Normativity
+
+from menus.transparencia.informacion_entidad import *
+# from menus.transparencia._01funcionesydeberes import Deberes
+# from menus.transparencia._02organigrama import Organigrama
+# from menus.transparencia._04directorioInstitucional import DirectorioInstitucional
+# from menus.transparencia._05directorioServidores import DirectorioServidores
+# from menus.transparencia._14protocolosDeAtención import ProtocoloAtencion
+# from menus.transparencia._08procedimientosDecisiones import ProcedimientosDecisiones
+# from menus.transparencia._11decisionesDeAfectacion import DecisionesAfectacion
+# from menus.transparencia._12mecanismosVigilancia import MecanismosVigilancia
+# from menus.transparencia._09mecanismoPqrs import MecanismoPqrs
+
 from utils.utilsFuncionts import *
 
 
@@ -40,62 +37,62 @@ with open("websites.csv", 'r') as file:
 data = []
 keywordsList = [
     # Seccion1. Información de la entidad
-    ['funciones y deberes'], 
-    ['organigrama'], 
-    ['mapas y cartas descriptivas de los procesos' ],
-    ['directorio institucional'],
-    ['información de servidores públicos', 'directorio de servidores públicos'],
-    ['directorio de entidades'],
-    ['directorio de asociaciones, agremiaciones'],
-    ['procedimientos que se siguen para tomar decisiones', 'procesos y procedimientos'],
-    ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes'],
-    ['calendario de actividades'],
-    ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],
-    ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad'],
-    ['publicación de hojas de vida'],
-    ['servicio al público, normas, formularios y protocolos de atención'],
+    ['funciones y deberes'],                                                                                                                                #01
+    ['organigrama'],                                                                                                                                        #02 
+    ['mapas y cartas descriptivas de los procesos' ],                                                                                                       #03
+    ['directorio institucional'],                                                                                                                           #04
+    ['información de servidores públicos', 'directorio de servidores públicos'],                                                                            #05
+    ['directorio de entidades'],                                                                                                                            #06
+    ['directorio de asociaciones, agremiaciones'],                                                                                                          #07
+    ['procedimientos que se siguen para tomar decisiones', 'procesos y procedimientos'],                                                                    #08
+    ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes'],                                                    #09
+    ['calendario de actividades'],                                                                                                                          #10
+    ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],                                                                #11
+    ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad'],                                                                            #12
+    ['publicación de hojas de vida'],                                                                                                                       #13
+    ['servicio al público, normas, formularios y protocolos de atención'],                                                                                  #14
 
     # Normativa
-    ['normativa de la entidad', 'normatividad'],
-    ['búsqueda de normas'],
-    ['proyectos de normas para comentarios'],
+    ['normativa de la entidad', 'normatividad'],                                                                                                            #15
+    ['búsqueda de normas'],                                                                                                                                 #16
+    ['proyectos de normas para comentarios'],                                                                                                               #17
     
     # Contratación
-    ['plan anual de adquisiciones'],
-    ['información contractual'],
-    [ 'ejecución de contratos'],
-    ['manual de contratación, adquisición y/o compras'],
-    ['formatos o modelos de contratos'],
+    ['plan anual de adquisiciones'],                                                                                                                        #18
+    ['información contractual'],                                                                                                                            #19
+    ['ejecución de contratos'],                                                                                                                             #20
+    ['manual de contratación, adquisición y/o compras'],                                                                                                    #21
+    ['formatos o modelos de contratos'],                                                                                                                    #22
 
     # Planeación
-    ['presupuesto general'],
-    ['ejecución presupuestal', 'histórica anual', ],
-    ['plan de acción'],
-    ['proyectos de inversión'],
-    ['informes de empalme'],
-    ['informes de gestión, evaluación y auditoría'],
-    ['informes de la oficina de control interno'],
-    ['informe sobre defensa pública y prevención del daño antijurídico'],
-    ['informes trimestrales sobre acceso a información, quejas y reclamos'],
+    ['presupuesto general'],                                                                                                                                #23
+    ['ejecución presupuestal', 'histórica anual', ],                                                                                                        #24
+    ['plan de acción'],                                                                                                                                     #25
+    ['proyectos de inversión'],                                                                                                                             #26
+    ['informes de empalme'],                                                                                                                                #27
+    ['informes de gestión, evaluación y auditoría'],                                                                                                        #28
+    ['informes de la oficina de control interno'],                                                                                                          #29
+    ['informe sobre defensa pública y prevención del daño antijurídico'],                                                                                   #30
+    ['informes trimestrales sobre acceso a información, quejas y reclamos'],                                                                                #31
     
     # Trámites
-    ['trámites y servicios','trámites'],
+    ['trámites y servicios','trámites'],                                                                                                                    #32
     
     # # Participa
     # ['descripción general del menú participa', 'descripción general']
     # ['diagnóstico e identificación de problemas'],
 
     # Datos abiertos
-    ['instrumentos de gestión de la información'],
-    ['sección de datos abiertos'],
+    ['instrumentos de gestión de la información'],                                                                                                          #33
+    ['sección de datos abiertos'],                                                                                                                          #34
 
     # Información especifica para Grupos de inter'es
-    ['información para niños, niñas y adolescentes'],
-    ['información para mujeres'],
+    ['información para niños, niñas y adolescentes'],                                                                                                       #35
+    ['información para mujeres'],                                                                                                                           #36
     
     # Información tributaria en ent terr locales
-    ['procesos de recaudo de rentas locales'],
-    ['tarifas de liquidación del impuesto de industria y comercio']
+    ['procesos de recaudo de rentas locales'],                                                                                                              #37
+    ['tarifas de liquidación del impuesto de industria y comercio']                                                                                         #38
  
 
 ]
@@ -134,7 +131,7 @@ obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
 obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
 obj__directorioInst = DirectorioInstitucional(keywordsList[2], MAX_CHARACTERS)
 obj__directorioServ = DirectorioServidores(keywordsList[3], MAX_CHARACTERS)
-obj__protocoloAtenc = ProtocoloAtencion(keywordsList[4], MAX_CHARACTERS)
+obj__protocoloAtenc = ProtocolosAtencion(keywordsList[4], MAX_CHARACTERS)
 obj__procedimientoDec = ProcedimientosDecisiones(keywordsList[5], MAX_CHARACTERS)
 obj__decAfectacion = DecisionesAfectacion(keywordsList[6], MAX_CHARACTERS)
 obj__mecanismoVig = MecanismosVigilancia(keywordsList[7], MAX_CHARACTERS)

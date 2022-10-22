@@ -1,4 +1,5 @@
 .vscode/
+classes/
 data.csv
 data.xlsx
 prueba.py
