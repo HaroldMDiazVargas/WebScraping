@@ -27,4 +27,4 @@ class ProcedimientosDecisiones(abstractBase.Requisites):
             title = "-"
             info = "-"
         # print(budgetDate)
-        return onPage, date, title, info
+        return onPage, date, title, info, browser.current_url

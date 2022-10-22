@@ -18,4 +18,4 @@ class AnualBuyPlan(abstractBase.Requisites):
             budgetDate = "-"
             budgetInfo = "-"
         # print(budgetDate)
-        return onPage, budgetInfo, budgetDate
+        return onPage, budgetInfo, budgetDate, browser.current_url

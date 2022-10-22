@@ -24,9 +24,9 @@ class Deberes(abstractBase.Requisites):
             date = "-"
             title = "-"
             info = "-"
-        return onPage, date, title, info
+        return onPage, date, title, info, browser.current_url
 
-        
+
         # dates = redirectSoup.select_one(".dateMc-wrap").select("span")
         # info = redirectSoup.select_one(".content-descri p").getText()
 

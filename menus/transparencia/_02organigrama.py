@@ -24,7 +24,7 @@ class Organigrama(abstractBase.Requisites):
             title = "-"
             info = "-"
         # print(budgetDate)
-        return onPage, date, title, info
+        return onPage, date, title, info, browser.current_url
 
 
         # organigramaImg = soup.select_one("img[alt=Organigrama]")

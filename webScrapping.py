@@ -45,8 +45,8 @@ keywordsList = [
     ['información de servidores públicos', 'directorio de servidores públicos'],
     ['servicio al público, normas, formularios y protocolos de atención'],
     ['procedimientos que se siguen para tomar decisiones'],
-    ['decisiones que pueden afectar al público'],
-    ['autoridades que vigilan'],
+    ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],
+    ['autoridades que lo vigilan'],
     ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes']
     # ['presupuesto general'],
     # [ 'histórica anual', 'ejecución presupuestal'],
@@ -71,6 +71,7 @@ dataByUrl = {
     'keywords':keywords, #'información de servidores'
     "Existe": [],
     "url": [],
+    "Titulo":[]
     "info":[], 
     "ultMod": []
 }  
@@ -115,8 +116,9 @@ for url in urls:
     dataByUrl["keywords"] = []
     dataByUrl["Existe"] = []  
     dataByUrl["url"] = []
+    dataByUrl["Titulo"] = []
     dataByUrl["info"] = []
-    dataByUrl["ultMod"] = []
+    dataByUrl["UltimaModif"]= []
     print(f"URL = {url}")
     print(f"Index url {baseRef}")
     baseRef = baseRef + 1
@@ -138,45 +140,22 @@ for url in urls:
                 print(count," word: ", obj.keyword)
                 count = count+1
                 childSoup = BeautifulSoup(browser.page_source, "html.parser")
-                onPage, info, ultMod = obj.checkRequisites(childSoup, browser)
+                onPage, date, title, info, address = obj.checkRequisites(childSoup, browser)
 
                 dataByUrl["keywords"].append(obj.keyword[0])
                 dataByUrl["Existe"].append(onPage)
-                dataByUrl["url"].append(hrefLink)
-                dataByUrl["info"].append(info)
-                dataByUrl["ultMod"].append(ultMod)
+                dataByUrl["url"].append(address)
+                dataByUrl["Titulo"].append(title)
+                dataByUrl["Info"].append(info)
+                dataByUrl["UltimaModif"].append(date)
 
 
                 break
-    tupla = list(dataByUrl.items())
-    data.append(tupla)
+    print(dataByUrl)
+    # tupla = list(dataByUrl.items())
+    # data.append(tupla)
 
-print(data)
-arrayData, columns = convertToArray(data, dataByUrl, keywords)
-exportXlsx(arrayData,columns ) # 3rd arg optional => Filename.xlsx
-browser.quit()
-
-
-# arrayData = np.empty((len(keywords), len(dataByUrl)), dtype=object)
-# arrayDynamic = np.empty((len(keywords), len(dataByUrl)), dtype=object)
-
-# count = 0
-# for urlData in data:
-#     columns = []
-#     for cols in range(len(urlData)):
-#         # print(urlData[cols])
-#         columns.append(urlData[cols][0])
-#         for rows in range(len(keywords)):
-#             # print(urlData[cols][1][rows])
-#             arrayData[rows][cols] = urlData[cols][1][rows]
-#     if (count != 0):
-#         # con = np.concatenate((arrayData,arrayDynamic),axis=1)
-#         arrayDynamic = np.vstack((arrayDynamic, arrayData))
-#     if (count == 0):
-#         arrayDynamic[:][:] = arrayData[:][:]
-#         count = count +1
-
-# df = pd.DataFrame(arrayDynamic, columns= columns)
-# df.to_excel(excel_writer = "data.xlsx")
-
-# print("Proccessed succesfully")
+# print(data)
+# arrayData, columns = convertToArray(data, dataByUrl, keywords)
+# exportXlsx(arrayData,columns ) # 3rd arg optional => Filename.xlsx
+# browser.quit()
