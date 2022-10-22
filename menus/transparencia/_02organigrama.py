@@ -4,7 +4,7 @@
 from requisites import abstractBase
 
 
-class Organigram(abstractBase.Requisites):
+class Organigrama(abstractBase.Requisites):
 
     
     def checkRequisites(self, soup, browser):

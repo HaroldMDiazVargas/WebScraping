@@ -3,9 +3,15 @@
 
  
  
-from menus.transparencia._01funcionesydeberes import Duties
-from menus.transparencia._02organigrama import Organigram 
-from menus.transparencia._04directorioServidores import ServersDirectory
+from menus.transparencia._01funcionesydeberes import Deberes
+from menus.transparencia._02organigrama import Organigrama
+from menus.transparencia._03directorioInstitucional import DirectorioInstitucional
+from menus.transparencia._04directorioServidores import DirectorioServidores
+from menus.transparencia._05protocolosDeAtención import ProtocoloAtencion
+from menus.transparencia._06procedimientosDecisiones import ProcedimientosDecisiones
+from menus.transparencia._07decisionesDeAfectacion import DecisionesAfectacion
+from menus.transparencia._08mecanismosVigilancia import MecanismosVigilancia
+from menus.transparencia._09mecanismoPqrs import MecanismoPqrs
 # from menus.transparencia.generalBudget import GeneralBudget 
 # from menus.transparencia.anualHistoric import AnualHistoric 
 # from menus.transparencia.anualBuyPlan import AnualBuyPlan
@@ -36,7 +42,7 @@ keywordsList = [
     ['funciones y deberes'], 
     ['organigrama'], 
     ['directorio institucional'],
-    [ 'información de servidores públicos', 'directorio de servidores públicos'],
+    ['información de servidores públicos', 'directorio de servidores públicos'],
     ['servicio al público, normas, formularios y protocolos de atención'],
     ['procedimientos que se siguen para tomar decisiones'],
     ['decisiones que pueden afectar al público'],
@@ -72,7 +78,7 @@ dataByUrl = {
 
 # Information to gather
 # obj__organigram = Organigram(keywords[0], MAX_CHARACTERS)
-# obj__duties = Duties(keywords[1], MAX_CHARACTERS)
+# obj__Deberes = Deberes(keywords[1], MAX_CHARACTERS)
 # obj__generalBudget = GeneralBudget(keywords[2], MAX_CHARACTERS)
 # obj__anualHistoric = AnualHistoric(keywords[3], MAX_CHARACTERS)
 # obj__serverDirectory = ServersDirectory(keywords[4], MAX_CHARACTERS)
@@ -80,9 +86,15 @@ dataByUrl = {
 # obj__contractExec = ContractExecution(keywords[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywords[7], MAX_CHARACTERS)
 
-obj__duties = Duties(keywordsList[1], MAX_CHARACTERS)
-obj__organigram = Organigram(keywordsList[0], MAX_CHARACTERS)
-obj__serverDirectory = ServersDirectory(keywordsList[4], MAX_CHARACTERS)
+obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
+obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
+obj__directorioInst = DirectorioInstitucional(keywordsList[2], MAX_CHARACTERS)
+obj__directorioServ = DirectorioServidores(keywordsList[3], MAX_CHARACTERS)
+obj__protocoloAtenc = ProtocoloAtencion(keywordsList[4], MAX_CHARACTERS)
+obj__procedimientoDec = ProcedimientosDecisiones(keywordsList[5], MAX_CHARACTERS)
+obj__decAfectacion = DecisionesAfectacion(keywordsList[6], MAX_CHARACTERS)
+obj__mecanismoVig = MecanismosVigilancia(keywordsList[7], MAX_CHARACTERS)
+obj__mecanismoPqrs = MecanismoPqrs(keywordsList[8], MAX_CHARACTERS)
 
 # obj__generalBudget = GeneralBudget(keywordsList[2], MAX_CHARACTERS)
 # obj__anualHistoric = AnualHistoric(keywordsList[3], MAX_CHARACTERS)
@@ -90,7 +102,7 @@ obj__serverDirectory = ServersDirectory(keywordsList[4], MAX_CHARACTERS)
 # obj__contractExec = ContractExecution(keywordsList[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywordsList[7], MAX_CHARACTERS)
 
-objects = [obj__duties, obj__organigram, ]
+objects = [obj__deberes, obj__organigrama, obj__directorioInst, obj__directorioServ, obj__protocoloAtenc, obj__procedimientoDec, obj__decAfectacion, obj__mecanismoVig, obj__mecanismoPqrs]
 # objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
 browser = webdriver.Chrome()
 baseRef = 1037
@@ -98,9 +110,9 @@ amountUrls = 100
 urls = urls[baseRef:baseRef+amountUrls] # 100 a 200
 # print(urls)
 listNotExist = [1035, 1036, 1042]
-# urls = ['http://www.altobaudo-choco.gov.co']
+urls = ['http://www.altobaudo-choco.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
 for url in urls:
-    
+    dataByUrl["keywords"] = []
     dataByUrl["Existe"] = []  
     dataByUrl["url"] = []
     dataByUrl["info"] = []
@@ -128,6 +140,7 @@ for url in urls:
                 childSoup = BeautifulSoup(browser.page_source, "html.parser")
                 onPage, info, ultMod = obj.checkRequisites(childSoup, browser)
 
+                dataByUrl["keywords"].append(obj.keyword[0])
                 dataByUrl["Existe"].append(onPage)
                 dataByUrl["url"].append(hrefLink)
                 dataByUrl["info"].append(info)

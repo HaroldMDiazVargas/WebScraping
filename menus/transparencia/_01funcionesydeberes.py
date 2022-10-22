@@ -6,7 +6,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 
-class Duties(abstractBase.Requisites):
+class Deberes(abstractBase.Requisites):
     def checkRequisites(self, soup, browser):
 
         if (soup.select_one(".content_text")):

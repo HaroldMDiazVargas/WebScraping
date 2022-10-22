@@ -2,13 +2,18 @@
 from requisites import abstractBase
 
 
-class ServersDirectory(abstractBase.Requisites):
+class DirectorioServidores(abstractBase.Requisites):
     def checkRequisites(self, soup, browser):
         if(soup.select_one(".content_text")):
-            checkDate = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
-            checkInfo = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()[:self.maxCharacters]
-            checkTitle = soup.select_one(".content_text").select_one(".content-tit span").getText()
-            checkInfo = checkTitle+" "+checkInfo
+            date = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
+            title = soup.select_one(".content_text").select_one(".content-tit span").getText()
+            info = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()[:self.maxCharacters]
+            onPage = True
+        
+        elif(soup.select_one(".section-tit")):
+            date = "-"
+            title = soup.select_one(".section-tit").getText()
+            info = soup.select_one(".content-descri").getText()
             onPage = True
 
         # if (soup.select_one(".content_text")):
@@ -17,7 +22,8 @@ class ServersDirectory(abstractBase.Requisites):
         #     onPage = True
         else:
             onPage = False
-            checkDate = "-"
-            checkInfo = "-"
+            date = "-"
+            title = "-"
+            info = "-"
         # print(budgetDate)
-        return onPage, checkInfo, checkDate
+        return onPage, date, title, info
