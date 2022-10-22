@@ -7,6 +7,9 @@ name = "pypi"
 requests = "*"
 beautifulsoup4 = "*"
 selenium = "*"
+numpy = "*"
+pandas = "*"
+openpyxl = "*"
 
 [dev-packages]
 pylint = "*"

@@ -98,11 +98,7 @@ def checkDuties(argSoup):
 
     return onPage, info, dates[0].string[-19:]
 
-    # dates.sele
-    # articlesByContent= soup.select(".content_text")
-    # if len(articlesByContent) > 0:
-    #     for article in articlesByContent:
-    #         if 
+
 
 def checkBudget(argSoup):
     if (argSoup.select_one(".content_text")):
@@ -219,59 +215,14 @@ for url in urls:
 
 with open("sample.json", "w") as outfile:
     json.dump(data, outfile)
-# json_object = json.dumps(data, indent = 4) 
-# print(data)
-
-
-# for word in keywords:
-#     for item in accordionItems:
-#         if wordExists(word, item):
-#             print(f"Link {word} exists")
-#             link = item.select_one("a")
-#             # print(link)
-#             # print(link.get("href"))
-#             browser.get(url+link.get("href"))
-#             sleep(3)
-#             childSoup = BeautifulSoup(browser.page_source, "html.parser")
-#             if word == "organigrama":
-#                 # setGroup(link.get("href"))
-#                 checkOrganigram(childSoup)
-#             if word == "funciones y deberes":
-#                 checkDuties()
-#             if word == "presupuesto general":
-#                 checkBudget(childSoup)
-#             if word == "histórica anual":
-#                 checkAnualHistoric(childSoup)
-#             if word == "información de servidores":
-#                 checkPublicDirectory(childSoup)
-
-#             break
-
-# time.sleep(3) 
-# linkSoup = BeautifulSoup(browser.page_source, "html.parser")
-# organigramaImg =  linkSoup.select_one("img[alt=Organigrama]")
-# print(organigramaImg)
 
 
 
-        # print(link)
-        # i.click()
-    # if(i.string.lower() == text):
-    #     print(i)
+
+
 
 
 # browser.quit()
-
-# # Search by text with the help of lambda function
-# gfg = soup.find_all(lambda tag: tag.name == "strong" and text in tag.text)
-# print(soup)
-# print(accordionItems[0])
-# print(accordionItems[0].select("header"))
-# # if (accordionItems[0].get("ng-if")):
-    
-
-
-
 
 
 # python -m venv envName
