@@ -39,21 +39,64 @@ with open("websites.csv", 'r') as file:
  
 data = []
 keywordsList = [
+    # Seccion1. Información de la entidad
     ['funciones y deberes'], 
     ['organigrama'], 
-    ['directorio institucional','directorio de entidades'],
+    ['mapas y cartas descriptivas de los procesos' ],
+    ['directorio institucional'],
     ['información de servidores públicos', 'directorio de servidores públicos'],
-    ['servicio al público, normas, formularios y protocolos de atención'],
+    ['directorio de entidades'],
+    ['directorio de asociaciones, agremiaciones'],
     ['procedimientos que se siguen para tomar decisiones', 'procesos y procedimientos'],
+    ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes'],
+    ['calendario de actividades'],
     ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],
     ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad'],
-    ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes']
-    # ['presupuesto general'],
-    # [ 'histórica anual', 'ejecución presupuestal'],
-    # [ 'información de servidores', 'directorio de servidores públicos'],
-    # ['plan anual de adquisiciones'],
-    # [ 'ejecución de contratos'],
-    # [ 'normatividad']
+    ['publicación de hojas de vida'],
+    ['servicio al público, normas, formularios y protocolos de atención'],
+
+    # Normativa
+    ['normativa de la entidad', 'normatividad'],
+    ['búsqueda de normas'],
+    ['proyectos de normas para comentarios'],
+    
+    # Contratación
+    ['plan anual de adquisiciones'],
+    ['información contractual'],
+    [ 'ejecución de contratos'],
+    ['manual de contratación, adquisición y/o compras'],
+    ['formatos o modelos de contratos'],
+
+    # Planeación
+    ['presupuesto general'],
+    ['ejecución presupuestal', 'histórica anual', ],
+    ['plan de acción'],
+    ['proyectos de inversión'],
+    ['informes de empalme'],
+    ['informes de gestión, evaluación y auditoría'],
+    ['informes de la oficina de control interno'],
+    ['informe sobre defensa pública y prevención del daño antijurídico'],
+    ['informes trimestrales sobre acceso a información, quejas y reclamos'],
+    
+    # Trámites
+    ['trámites y servicios','trámites'],
+    
+    # # Participa
+    # ['descripción general del menú participa', 'descripción general']
+    # ['diagnóstico e identificación de problemas'],
+
+    # Datos abiertos
+    ['instrumentos de gestión de la información'],
+    ['sección de datos abiertos'],
+
+    # Información especifica para Grupos de inter'es
+    ['información para niños, niñas y adolescentes'],
+    ['información para mujeres'],
+    
+    # Información tributaria en ent terr locales
+    ['procesos de recaudo de rentas locales'],
+    ['tarifas de liquidación del impuesto de industria y comercio']
+ 
 
 ]
 keywords = [
