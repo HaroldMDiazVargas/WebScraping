@@ -259,11 +259,12 @@ class DirectorioEntidades(abstractBase.Requisites):
 
 # 07. Directorio de agremiaciones
 class DirectorioAgremiaciones(abstractBase.Requisites):
-    onPage = False
-    date = "-"
-    title = "-"
-    info = "-"
+    
     def checkRequisites(self, soup, browser):
+        onPage = False
+        date = "-"
+        title = "-"
+        info = "-"
         if(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
@@ -351,15 +352,16 @@ class MecanismoPqrs(abstractBase.Requisites):
                 onPage = False
                 info = '-'
 
-        # if (soup.select_one(".content_text")):
-        #     budgetDate = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
-        #     budgetInfo = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()[:self.maxCharacters]
-        #     onPage = True
-        elif (soup.select_one("label[for]")):
+        elif (soup(text=lambda t: "Registrarse" in t.text)):
             info = "Ubicado en sitio web externo"
             title = "-"
             onPage = True
-            date = '-'
+            date = "-"
+        # elif (soup.select_one("label[for]")):
+        #     info = "Ubicado en sitio web externo"
+        #     title = "-"
+        #     onPage = True
+        #     date = '-'
                  # PQRS de otra pagina externa!!!
             
         # print(budgetDate)

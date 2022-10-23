@@ -17,13 +17,18 @@ def getTextData(htmlItem):
     except AttributeError:
         return "-"
 
-def convertToArray(data, dataByUrl):
-    arrayData = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
-    arrayDynamic = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
+def convertToArray(data):
+    # arrayData = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
+    # arrayDynamic = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
 
     count = 0
     for urlData in data:
         columns = []
+      
+        # arrayData = np.empty((len(urlData["keywords"]), len(urlData)), dtype=object)
+        arrayData = np.empty((len(urlData[0][1]), len(urlData)), dtype=object)
+            # arrayDynamic[:][:] = arrayData[:][:]
+            # count = count +1
         for cols in range(len(urlData)):  #measurements
             # print(urlData[cols])
             columns.append(urlData[cols][0])
@@ -36,7 +41,7 @@ def convertToArray(data, dataByUrl):
             # con = np.concatenate((arrayData,arrayDynamic),axis=1)
             arrayDynamic = np.vstack((arrayDynamic, arrayData))
         if (count == 0):
-            arrayDynamic[:][:] = arrayData[:][:]
+            arrayDynamic = arrayData
             count = count +1
     return arrayDynamic, columns
 # def concatData(allData, dataWebsite):

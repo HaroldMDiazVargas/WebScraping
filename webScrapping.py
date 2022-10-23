@@ -4,6 +4,7 @@
  
 
 from menus.transparencia.informacion_entidad import *
+from menus.transparencia.normatividad import *
 # from menus.transparencia._01funcionesydeberes import Deberes
 # from menus.transparencia._02organigrama import Organigrama
 # from menus.transparencia._04directorioInstitucional import DirectorioInstitucional
@@ -128,21 +129,25 @@ dataByUrl = {
 # obj__normativity = Normativity(keywords[7], MAX_CHARACTERS)
 
 # Información de la entidad
-obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
-obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
-obj__cartas_descriptivas = cartasDescriptivas(keywordsList[2], MAX_CHARACTERS)
-obj__directorio_institucional = DirectorioInstitucional(keywordsList[3], MAX_CHARACTERS)
-obj__directorio_servidores = DirectorioServidores(keywordsList[4], MAX_CHARACTERS)
-obj__directorio_entidades = DirectorioEntidades(keywordsList[5], MAX_CHARACTERS)
-obj__directorio_agremiacion = DirectorioAgremiaciones(keywordsList[6], MAX_CHARACTERS)
-obj__procedimientos_decisiones = ProcedimientosDecisiones(keywordsList[7], MAX_CHARACTERS)
-obj__mecanismo_pqrs = MecanismoPqrs(keywordsList[8], MAX_CHARACTERS)
-obj__calendario_actividades = CalendarioActividades(keywordsList[9], MAX_CHARACTERS)
-obj__decisiones_afecta = DecisionesAfectacion(keywordsList[10], MAX_CHARACTERS)
-obj__mecanismo_vigilancia = MecanismosVigilancia(keywordsList[11], MAX_CHARACTERS)
-obj__publicacion_cv = PublicacionCV(keywordsList[12], MAX_CHARACTERS)
-obj__protocolo_atencion = ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
+# obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
+# obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
+# obj__cartas_descriptivas = cartasDescriptivas(keywordsList[2], MAX_CHARACTERS)
+# obj__directorio_institucional = DirectorioInstitucional(keywordsList[3], MAX_CHARACTERS)
+# obj__directorio_servidores = DirectorioServidores(keywordsList[4], MAX_CHARACTERS)
+# obj__directorio_entidades = DirectorioEntidades(keywordsList[5], MAX_CHARACTERS)
+# obj__directorio_agremiacion = DirectorioAgremiaciones(keywordsList[6], MAX_CHARACTERS)
+# obj__procedimientos_decisiones = ProcedimientosDecisiones(keywordsList[7], MAX_CHARACTERS)
+# obj__mecanismo_pqrs = MecanismoPqrs(keywordsList[8], MAX_CHARACTERS)
+# obj__calendario_actividades = CalendarioActividades(keywordsList[9], MAX_CHARACTERS)
+# obj__decisiones_afecta = DecisionesAfectacion(keywordsList[10], MAX_CHARACTERS)
+# obj__mecanismo_vigilancia = MecanismosVigilancia(keywordsList[11], MAX_CHARACTERS)
+# obj__publicacion_cv = PublicacionCV(keywordsList[12], MAX_CHARACTERS)
+# obj__protocolo_atencion = ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
 
+# Normatividad
+obj__normatividad_entidad= NormatividadEntidad(keywordsList[14], MAX_CHARACTERS)
+obj__busqueda_normas= BusquedaNormas(keywordsList[15], MAX_CHARACTERS)
+obj__normas_comentarios = NormasParaComentarios(keywordsList[16], MAX_CHARACTERS)
 # objects = [
 # Deberes(keywordsList[0], MAX_CHARACTERS),
 # Organigrama(keywordsList[1], MAX_CHARACTERS),
@@ -167,8 +172,11 @@ obj__protocolo_atencion = ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
 # obj__contractExec = ContractExecution(keywordsList[6], MAX_CHARACTERS)
 # obj__normativity = Normativity(keywordsList[7], MAX_CHARACTERS)
 
-objects = [obj__deberes, obj__organigrama, obj__cartas_descriptivas, obj__directorio_institucional, obj__directorio_servidores, obj__directorio_entidades, obj__directorio_agremiacion, obj__procedimientos_decisiones,
-        obj__mecanismo_pqrs,obj__calendario_actividades, obj__decisiones_afecta, obj__mecanismo_vigilancia,obj__publicacion_cv, obj__protocolo_atencion  ]
+objects = [
+        # obj__deberes, obj__organigrama, obj__cartas_descriptivas, obj__directorio_institucional, obj__directorio_servidores, obj__directorio_entidades, obj__directorio_agremiacion, obj__procedimientos_decisiones,
+        # obj__mecanismo_pqrs,obj__calendario_actividades, obj__decisiones_afecta, obj__mecanismo_vigilancia,obj__publicacion_cv, obj__protocolo_atencion,
+        obj__normatividad_entidad, obj__busqueda_normas, obj__normas_comentarios  
+        ]
 # objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
 browser = webdriver.Chrome()
 baseRef = 1037
@@ -176,7 +184,7 @@ amountUrls = 100
 urls = urls[baseRef:baseRef+amountUrls] # 100 a 200
 # print(urls)
 listNotExist = [1035, 1036, 1042]
-urls = ['https://www.tunja-boyaca.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
+urls = [ 'https://www.tunja-boyaca.gov.co', 'http://www.altobaudo-choco.gov.co', 'http://www.armenia-antioquia.gov.co', 'http://www.aguasconfuturoesp.gov.co'] # 'https://www.tunja-boyaca.gov.co', 'http://www.altobaudo-choco.gov.co',
 for url in urls:
     dataByUrl["keywords"] = []
     dataByUrl["Existe"] = []  
@@ -219,11 +227,12 @@ for url in urls:
 
 
                 break
-    print(dataByUrl)
+    # print(dataByUrl)
     tupla = list(dataByUrl.items())
     data.append(tupla)
 
-# print(data)
-arrayData, columns = convertToArray(data, dataByUrl)
+print(data)
+# arrayData, columns = convertToArray(data, dataByUrl)
+arrayData, columns = convertToArray(data)
 exportXlsx(arrayData,columns ) # 3rd arg optional => Filename.xlsx
 browser.quit()
