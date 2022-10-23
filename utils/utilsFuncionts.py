@@ -10,6 +10,12 @@ def wordExists(word, item):
     else:
         return word[0] in item.string.lower()
 
+def getTextData(htmlItem):
+    try:
+        text = htmlItem.getText()
+        return text
+    except AttributeError:
+        return "-"
 
 def convertToArray(data, dataByUrl):
     arrayData = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)

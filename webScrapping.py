@@ -43,14 +43,14 @@ keywordsList = [
     ['directorio institucional'],                                                                                                                           #04
     ['información de servidores públicos', 'directorio de servidores públicos'],                                                                            #05
     ['directorio de entidades'],                                                                                                                            #06
-    ['directorio de asociaciones, agremiaciones'],                                                                                                          #07
+    ['directorio de asociaciones, agremiaciones', 'directorio de agremiaciones'],                                                                                                          #07
     ['procedimientos que se siguen para tomar decisiones', 'procesos y procedimientos'],                                                                    #08
     ['mecanismos para presentar quejas y reclamos', 'mecanismo de presentación directa de solicitudes'],                                                    #09
     ['calendario de actividades'],                                                                                                                          #10
     ['decisiones que pueden afectar al público', 'decisiones que puede afectar al público'],                                                                #11
-    ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad'],                                                                            #12
+    ['autoridades que lo vigilan', 'entes de control que vigilan a la entidad','entes de control'],                                                                            #12
     ['publicación de hojas de vida'],                                                                                                                       #13
-    ['servicio al público, normas, formularios y protocolos de atención'],                                                                                  #14
+    ['servicio al público, normas, formularios y protocolos de atención', 'servicio al público, normas'],                                                                                  #14
 
     # Normativa
     ['normativa de la entidad', 'normatividad'],                                                                                                            #15
@@ -176,7 +176,7 @@ amountUrls = 100
 urls = urls[baseRef:baseRef+amountUrls] # 100 a 200
 # print(urls)
 listNotExist = [1035, 1036, 1042]
-urls = ['http://www.zapatoca-santander.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
+urls = ['https://www.tunja-boyaca.gov.co'] # https://www.tunja-boyaca.gov.co/transparencia
 for url in urls:
     dataByUrl["keywords"] = []
     dataByUrl["Existe"] = []  
