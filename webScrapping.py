@@ -5,6 +5,7 @@
 
 from menus.transparencia.informacion_entidad import *
 from menus.transparencia.normatividad import *
+from menus.transparencia.contratacion import *
 # from menus.transparencia._01funcionesydeberes import Deberes
 # from menus.transparencia._02organigrama import Organigrama
 # from menus.transparencia._04directorioInstitucional import DirectorioInstitucional
@@ -62,7 +63,8 @@ keywordsList = [
     ['plan anual de adquisiciones'],                                                                                                                        #18
     ['información contractual'],                                                                                                                            #19
     ['ejecución de contratos'],                                                                                                                             #20
-    ['manual de contratación, adquisición y/o compras'],                                                                                                    #21
+    ['manual de contratación, adquisición y/o compras', 
+    'políticas en materia de adquisición y compras'],                                                                                                    #21
     ['formatos o modelos de contratos'],                                                                                                                    #22
 
     # Planeación
@@ -118,16 +120,6 @@ dataByUrl = {
 }  
 
 
-# Information to gather
-# obj__organigram = Organigram(keywords[0], MAX_CHARACTERS)
-# obj__Deberes = Deberes(keywords[1], MAX_CHARACTERS)
-# obj__generalBudget = GeneralBudget(keywords[2], MAX_CHARACTERS)
-# obj__anualHistoric = AnualHistoric(keywords[3], MAX_CHARACTERS)
-# obj__serverDirectory = ServersDirectory(keywords[4], MAX_CHARACTERS)
-# obj__anualBuyPlan = AnualBuyPlan(keywords[5], MAX_CHARACTERS)
-# obj__contractExec = ContractExecution(keywords[6], MAX_CHARACTERS)
-# obj__normativity = Normativity(keywords[7], MAX_CHARACTERS)
-
 # Información de la entidad
 # obj__deberes = Deberes(keywordsList[0], MAX_CHARACTERS)
 # obj__organigrama = Organigrama(keywordsList[1], MAX_CHARACTERS)
@@ -145,9 +137,19 @@ dataByUrl = {
 # obj__protocolo_atencion = ProtocolosAtencion(keywordsList[13], MAX_CHARACTERS)
 
 # Normatividad
-obj__normatividad_entidad= NormatividadEntidad(keywordsList[14], MAX_CHARACTERS)
-obj__busqueda_normas= BusquedaNormas(keywordsList[15], MAX_CHARACTERS)
-obj__normas_comentarios = NormasParaComentarios(keywordsList[16], MAX_CHARACTERS)
+# obj__normatividad_entidad= NormatividadEntidad(keywordsList[14], MAX_CHARACTERS)
+# obj__busqueda_normas= BusquedaNormas(keywordsList[15], MAX_CHARACTERS)
+# obj__normas_comentarios = NormasParaComentarios(keywordsList[16], MAX_CHARACTERS)
+
+# Contratacion
+obj__plan_anual = PlanAdquisiciones(keywordsList[17], MAX_CHARACTERS)
+obj__info_contractual= InfoContractual(keywordsList[18], MAX_CHARACTERS)
+obj__ejec_contratos = EjecucionContratos(keywordsList[19], MAX_CHARACTERS)
+obj__manual_contratacion = ManualContratacion(keywordsList[20], MAX_CHARACTERS)
+obj__formatos_contratos = FormatosContratos(keywordsList[21], MAX_CHARACTERS)
+
+
+
 # objects = [
 # Deberes(keywordsList[0], MAX_CHARACTERS),
 # Organigrama(keywordsList[1], MAX_CHARACTERS),
@@ -175,7 +177,9 @@ obj__normas_comentarios = NormasParaComentarios(keywordsList[16], MAX_CHARACTERS
 objects = [
         # obj__deberes, obj__organigrama, obj__cartas_descriptivas, obj__directorio_institucional, obj__directorio_servidores, obj__directorio_entidades, obj__directorio_agremiacion, obj__procedimientos_decisiones,
         # obj__mecanismo_pqrs,obj__calendario_actividades, obj__decisiones_afecta, obj__mecanismo_vigilancia,obj__publicacion_cv, obj__protocolo_atencion,
-        obj__normatividad_entidad, obj__busqueda_normas, obj__normas_comentarios  
+        # obj__normatividad_entidad, obj__busqueda_normas, obj__normas_comentarios  
+        obj__plan_anual, obj__info_contractual, obj__ejec_contratos, obj__manual_contratacion, obj__formatos_contratos
+
         ]
 # objects = [obj__organigram, obj__duties, obj__generalBudget, obj__anualHistoric, obj__serverDirectory, obj__anualBuyPlan, obj__contractExec, obj__normativity   ]
 browser = webdriver.Chrome()
