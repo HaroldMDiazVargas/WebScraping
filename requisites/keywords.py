@@ -53,18 +53,23 @@ Tramites = [
 
 Participa = [
     ['descripción general del menú participa', 'descripción general'],      #1
-    ['diagnóstico e identificación de problemas']                           #2
+    ['diagnóstico e identificación de problemas'],                          #2
+    ['consulta ciudadana'],                                                 #3
+    ['planeación y presupuesto participativo'],                             #4
+    ['control ciudadano', 'control social'],                                #5
+    ['rendición de cuentas']                                                #6
 ]
 
 
 DatosAbiertos = [
     ['instrumentos de gestión de la información'],        #1
-    ['sección de datos abiertos']                         #2
+    ['sección de datos abiertos', 'publicación de datos abiertos']                         #2
 ]
 
 GrupoInteres = [
     ['información para niños, niñas y adolescentes'],     #1
-    ['información para mujeres']                          #2
+    ['información para mujeres'],                         #2
+    ['información adicional']                             #3
 ]
 
 InfoTributaria = [
