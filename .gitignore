@@ -2,7 +2,7 @@
 classes/
 
 __pycache__/
-utils/__pycache__/
+utils/__pycache__/*
 
 menus/transparencia/__pycache__/
 
