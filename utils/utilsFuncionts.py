@@ -20,24 +20,15 @@ def getTextData(htmlItem):
         return "-"
 
 def convertToArray(data):
-
-    count = 0
     for urlData in data:
         columns = []
-     
         arrayData = np.empty((len(urlData[0][1]), len(urlData)), dtype=object)
-
-        for cols in range(len(urlData)):  
-            columns.append(urlData[cols][0])
-            for rows in range(len(urlData[cols][1])):
-                arrayData[rows][cols] = urlData[cols][1][rows]
-
-        if (count != 0):
-            arrayDynamic = np.vstack((arrayDynamic, arrayData))
-        if (count == 0):
-            arrayDynamic = arrayData
-            count = count +1
-    return arrayDynamic, columns
+        for i, (cols, rows) in enumerate(urlData):
+            columns.append(cols)
+            for j, row in enumerate(rows): 
+                arrayData[j][i] = row
+      
+    return arrayData, columns    
 
 
 def exportXlsx(arrayData, columns, filename="data.xlsx" ):
@@ -47,23 +38,23 @@ def exportXlsx(arrayData, columns, filename="data.xlsx" ):
     print("Proccessed succesfully")
 
 
-def dataframeFromArray(arrayData, columns):
-    df = pd.DataFrame(arrayData, columns= columns)
-    printDataframe(df)
+# def dataframeFromArray(arrayData, columns):
+#     df = pd.DataFrame(arrayData, columns= columns)
+#     printDataframe(df)
 
-def dataframeFromList(listData, columnName=["No existen"]):
-    df = pd.DataFrame(listData, columns=columnName)
-    printDataframe(df)
+# def dataframeFromList(listData, columnName=["No existen"]):
+#     df = pd.DataFrame(listData, columns=columnName)
+#     printDataframe(df)
 
 def printDataframe(dataframe):
     print(tabulate(dataframe, headers='keys', tablefmt='psql', showindex=False))
-
-
+   
+        
 def dataframeToHTML(dataframe):
     dataframe.to_html('temp.html', index=False, justify='center') 
 
-def printRequisites(arrayData, columns, noExistence):
+def printRequisites(data, noExistence):
     print("Listado de requisitos encontrados:")
-    dataframeFromArray(arrayData, columns)
+    printDataframe(pd.DataFrame.from_dict(data))
     print("Listado de requisitos no encontrados:")
-    dataframeFromList(noExistence)
+    printDataframe(pd.DataFrame.from_dict(noExistence))
