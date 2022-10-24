@@ -52,3 +52,8 @@ def exportXlsx(arrayData, columns, filename="data.xlsx" ):
     df.to_excel(excel_writer = filename)
 
     print("Proccessed succesfully")
+
+def printDataframe(arrayData, columns):
+    df = pd.DataFrame(arrayData, columns= columns)
+    print(df.to_markdown(tablefmt="grid"))
+    # print(df)
