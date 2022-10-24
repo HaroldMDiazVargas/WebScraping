@@ -8,7 +8,7 @@ from utils.utilsFuncionts import getTextData
 
 # 01.Funciones y deberes
 class Deberes(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser, newUrl):
+    def checkRequisites(self, soup, browser, newUrl):  
         onPage = False
         date = "-"
         title = "-"
@@ -25,14 +25,22 @@ class Deberes(abstractBase.Requisites):
             sleep(3)
         redirectSoup = BeautifulSoup(browser.page_source, "html.parser")
 
-        if(redirectSoup.select_one(".section-tit")):
-            date = redirectSoup.select_one(".dateMc-wrap")
-            if(date):
-                date = date.select("span")[0].string[-19:]
+        if(redirectSoup.select_one(".section-tit")): 
+            title = getTextData(redirectSoup.select_one(".section-tit")) 
+            if (redirectSoup.select_one(".dateMc-wrap")):
+                date = redirectSoup.select_one(".dateMc-wrap").select("span")[0].string[-19:]
+            
+            if(redirectSoup.select_one("p[ng-bind$='file.name']")):  
+                onPage = True
+                info = getTextData(redirectSoup.select_one("p[ng-bind$='file.name']"))
+            
+            elif(redirectSoup.select_one(".content-descri")):
+                info =  getTextData(redirectSoup.select_one(".content-descri"))
+                onPage = True
 
-            title = getTextData(redirectSoup.select_one(".section-tit"))
-            info = getTextData(redirectSoup.select_one(".content-descri p"))
-            onPage = True
+            if (redirectSoup(text=lambda t: "Escribe aquí las funciones y deberes" in t.text)):
+                    onPage = False
+        
             # date = redirectSoup.select_one(".dateMc-wrap").select("span")[0].string[-19:]
 
             # title = redirectSoup.select_one(".section-tit").getText()
