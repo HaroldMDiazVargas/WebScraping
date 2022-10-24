@@ -10,6 +10,7 @@ selenium = "*"
 numpy = "*"
 pandas = "*"
 openpyxl = "*"
+tabulate = "*"
 
 [dev-packages]
 pylint = "*"
