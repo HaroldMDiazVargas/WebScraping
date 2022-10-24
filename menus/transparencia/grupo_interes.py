@@ -88,7 +88,7 @@ class InfoMujeres(abstractBase.Requisites):
         return onPage, date, title, info[:self.maxCharacters], browser.current_url
 
 #2 información adicional
-class InfoMujeres(abstractBase.Requisites):
+class InfoAdicional(abstractBase.Requisites):
     def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
