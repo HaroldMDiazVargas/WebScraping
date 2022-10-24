@@ -4,13 +4,19 @@ from utils.utilsFuncionts import getTextData
 
 # 15 Normatividad de la entidad
 class NormatividadEntidad(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".norm-row")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        
+        elif(soup.select_one(".norm-row")):
             date = getTextData(soup.select_one(".norm-row").select_one("i[ng-bind$='date']"))
             title = getTextData(soup.select_one(".norm-row").select_one(".norm__name"))
             info = getTextData(soup.select_one(".norm-row").select_one(".norm__description"))
@@ -47,15 +53,20 @@ class NormatividadEntidad(abstractBase.Requisites):
         return onPage, date, title, info[:self.maxCharacters], browser.current_url
 
 
-# Busqueda de Normas
+#16 Busqueda de Normas
 class BusquedaNormas(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".norm-row")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".norm-row")):
             date = getTextData(soup.select_one(".norm-row").select_one("i[ng-bind$='date']"))
             title = getTextData(soup.select_one(".norm-row").select_one(".norm__name"))
             info = getTextData(soup.select_one(".norm-row").select_one(".norm__description"))
@@ -87,25 +98,30 @@ class BusquedaNormas(abstractBase.Requisites):
                 onPage = False
                 info="-"
 
-        elif (soup(text=lambda t: "Registrarse" in t.text)):
-            info = "Ubicado en sitio web externo"
-            title = "-"
-            onPage = True
-            date = "-"
+        # elif (soup(text=lambda t: "Registrarse" in t.text)):
+        #     info = "Ubicado en sitio web externo"
+        #     title = "-"
+        #     onPage = True
+        #     date = "-"
             
         # print(budgetDate)
         return onPage, date, title, info[:self.maxCharacters], browser.current_url
 
 
-# Proyecto de normas para comentarios
+#17 Proyecto de normas para comentarios
 class NormasParaComentarios(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".norm-row")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".norm-row")):
             date = getTextData(soup.select_one(".norm-row").select_one("i[ng-bind$='date']"))
             title = getTextData(soup.select_one(".norm-row").select_one(".norm__name"))
             info = getTextData(soup.select_one(".norm-row").select_one(".norm__description"))

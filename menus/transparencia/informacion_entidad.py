@@ -8,13 +8,18 @@ from utils.utilsFuncionts import getTextData
 
 # 01.Funciones y deberes
 class Deberes(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".content_text")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".content_text")):
             dutiesLink = browser.find_element(By.CSS_SELECTOR, "a[href*='funciones-y-deberes']")
             dutiesLink.click()
             sleep(3)
@@ -44,12 +49,18 @@ class Deberes(abstractBase.Requisites):
 class Organigrama(abstractBase.Requisites):
 
     
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".section-tit")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".section-tit")):
             # date = soup.select_one(".dateMc-wrap").select("span")[0].string[-19:]
             date = soup.select_one(".dateMc-wrap")
             if(date):
@@ -84,12 +95,17 @@ class Organigrama(abstractBase.Requisites):
 # 03. Mapas y cartas descriptivas de los procesos
 class cartasDescriptivas(abstractBase.Requisites):
     
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".docu--tit"))
             if (title == '-'):
@@ -134,12 +150,17 @@ class cartasDescriptivas(abstractBase.Requisites):
 # 04. Directorio Institucional
 
 class DirectorioInstitucional(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -176,12 +197,17 @@ class DirectorioInstitucional(abstractBase.Requisites):
 
 # 05. Directorio de servidores
 class DirectorioServidores(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             # date = soup.select_one(".content_text").select_one("p[ng-bind$='date']").getText()
             # title = soup.select_one(".content_text").select_one(".content-tit span").getText()
             # info = soup.select_one(".content_text").select_one("p[ng-bind-html$='metaDescription']").getText()
@@ -221,12 +247,17 @@ class DirectorioServidores(abstractBase.Requisites):
 
 # 06. Directorio de entidades
 class DirectorioEntidades(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -260,12 +291,17 @@ class DirectorioEntidades(abstractBase.Requisites):
 # 07. Directorio de agremiaciones
 class DirectorioAgremiaciones(abstractBase.Requisites):
     
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -296,12 +332,17 @@ class DirectorioAgremiaciones(abstractBase.Requisites):
 
 # 08. Procesos y procedimientos
 class ProcedimientosDecisiones(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -334,12 +375,18 @@ class ProcedimientosDecisiones(abstractBase.Requisites):
 
 # 09. Mecanismos para presentar quejas y reclamos
 class MecanismoPqrs(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".section-tit")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".section-tit")):
             title = getTextData(soup.select_one(".section-tit"))
            
             if (soup.select_one(".dateMc-wrap")):
@@ -352,11 +399,11 @@ class MecanismoPqrs(abstractBase.Requisites):
                 onPage = False
                 info = '-'
 
-        elif (soup(text=lambda t: "Registrarse" in t.text)):
-            info = "Ubicado en sitio web externo"
-            title = "-"
-            onPage = True
-            date = "-"
+        # elif (soup(text=lambda t: "Registrarse" in t.text)):
+        #     info = "Ubicado en sitio web externo"
+        #     title = "-"
+        #     onPage = True
+        #     date = "-"
         # elif (soup.select_one("label[for]")):
         #     info = "Ubicado en sitio web externo"
         #     title = "-"
@@ -369,12 +416,17 @@ class MecanismoPqrs(abstractBase.Requisites):
    
 # 10. calendario de Actividades
 class CalendarioActividades(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -406,12 +458,17 @@ class CalendarioActividades(abstractBase.Requisites):
 
 # 11. Decisiones que pueden afectar al público}
 class DecisionesAfectacion(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -443,12 +500,18 @@ class DecisionesAfectacion(abstractBase.Requisites):
 
 # 12. Mecanismos de vigilancia
 class MecanismosVigilancia(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -481,12 +544,17 @@ class MecanismosVigilancia(abstractBase.Requisites):
 
 # 13. Publicación hoja de vida
 class PublicacionCV(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -511,11 +579,11 @@ class PublicacionCV(abstractBase.Requisites):
             else:
                 onPage = False
                 info="-"
-        elif (soup.select_one("input[type*='text']")):
-            info = "Ubicado en sitio web externo"
-            title = "-"
-            onPage = True
-            date = "-"
+        # elif (soup.select_one("input[type*='text']")):
+        #     info = "Ubicado en sitio web externo"
+        #     title = "-"
+        #     onPage = True
+        #     date = "-"
       
             
         # print(budgetDate)
@@ -523,12 +591,18 @@ class PublicacionCV(abstractBase.Requisites):
 
 # 14. Servicio al público, normas, formularios y protocolos de atención'
 class ProtocolosAtencion(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+            
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):

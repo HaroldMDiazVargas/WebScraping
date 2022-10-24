@@ -4,13 +4,18 @@ from utils.utilsFuncionts import getTextData
 
 # 18 Plan anual de adquisiciones
 class PlanAdquisiciones(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".content_text")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -41,13 +46,18 @@ class PlanAdquisiciones(abstractBase.Requisites):
 
 # 19 Plan anual de adquisiciones
 class InfoContractual(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".norm-row")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".norm-row")):
             # date = getTextData(soup.select_one(".norm-row").select_one("i[ng-bind$='date']"))  or .norm__date
             date = getTextData(soup.select_one(".norm-row").select_one(".norm__date"))
             title = getTextData(soup.select_one(".norm-row").select_one(".norm__name"))
@@ -86,13 +96,18 @@ class InfoContractual(abstractBase.Requisites):
 
 # 20 Ejecución de contratos
 class EjecucionContratos(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
+        
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
 
-        if(soup.select_one(".content_text")):
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -123,13 +138,18 @@ class EjecucionContratos(abstractBase.Requisites):
 
 # 21 Manual de contratacion
 class ManualContratacion(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".content_text")):
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
@@ -160,13 +180,19 @@ class ManualContratacion(abstractBase.Requisites):
 
 # 22 Formatos o modelos de contratos
 class FormatosContratos(abstractBase.Requisites):
-    def checkRequisites(self, soup, browser):
+    def checkRequisites(self, soup, browser, newUrl):
         onPage = False
         date = "-"
         title = "-"
         info = "-"
 
-        if(soup.select_one(".content_text")):
+
+        if (newUrl):
+            onPage = True
+            info = "URL Externa"
+            return onPage, date, title, info[:self.maxCharacters], browser.current_url
+
+        elif(soup.select_one(".content_text")):
             date = getTextData(soup.select_one(".content_text").select_one("p[ng-bind$='date']"))
             title = getTextData(soup.select_one(".content_text").select_one(".content-tit span"))
             if (title == '-'):
