@@ -6,13 +6,13 @@
 from utils.utilsFuncionts import *
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from startup.startup import  objects, dataByUrl
+from startup.startup import  requisitesList, dataTrueTemplate, dataFalseTemplate
 from time import sleep
 import sys
 
 
 
-def computeRequisites(url,URLData, requisites ):
+def computeRequisites(url, dataTrue, dataFalse, requisites ):
 
     browser.get(url + "transparencia")
     sleep(5) 
@@ -38,22 +38,20 @@ def computeRequisites(url,URLData, requisites ):
                 childSoup = BeautifulSoup(browser.page_source, "html.parser")
                 onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
 
-                URLData["Menú"].append('transparencia')
-                URLData["Requisito"].append(requisite.keyword[0])
-                URLData["Existe"].append(onPage)
-                URLData["URL"].append(address)
-                URLData["Titulo"].append(title)
-                URLData["Información"].append(info)
-                URLData["Última modificación"].append(date)
-
+                dataTrue["Menú"].append('transparencia')
+                dataTrue["Requisito"].append(requisite.keyword[0])
+                dataTrue["Existe"].append(onPage)
+                dataTrue["URL"].append(address)
+                dataTrue["Titulo"].append(title)
+                dataTrue["Descripción"].append(info)
+                dataTrue["Última modificación"].append(date)
 
                 break
-        if not flagExistence:
-            noExistence.append(requisite.keyword[0])
 
-    tupla = list(URLData.items())
-    data.append(tupla)
-    # print(data)
+        if not flagExistence:
+            dataFalse["No existen"].append(requisite.keyword[0])
+
+    return dataTrue, dataFalse
     
     
 
@@ -66,22 +64,22 @@ if __name__ == "__main__":
     else:
         url = sys.argv[1]
         url = "http://"+url if not "http" in url else url
-        url =  url +'/' if not  url[-1] == "/" else url
+        url =  url +'/' if url[-1] != "/" else url
         print("URL =", url)
     
     # Initial settings
-    data = []
-    noExistence = []
+    # data = []
+    # noExistence = []
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     browser =  webdriver.Chrome(options=options)
 
     # Compute all requisites
-    computeRequisites(url, dataByUrl, objects)
+    dataTrue, dataFalse = computeRequisites(url, dataTrueTemplate, dataFalseTemplate, requisitesList)
 
     # Get data and work with it
-    arrayData, columns = convertToArray(data)
-    printRequisites(arrayData, columns, noExistence)
+    # arrayData, columns = convertToArray(data, notData)
+    printRequisites(dataTrue, dataFalse)
 
 
     browser.quit()
