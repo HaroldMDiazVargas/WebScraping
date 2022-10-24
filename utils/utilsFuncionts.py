@@ -1,6 +1,8 @@
 
 import numpy as np
 import pandas as pd
+from tabulate import tabulate
+
 
 def wordExists(word, item):
     if (len(word) > 1):
@@ -18,34 +20,25 @@ def getTextData(htmlItem):
         return "-"
 
 def convertToArray(data):
-    # arrayData = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
-    # arrayDynamic = np.empty((len(dataByUrl["keywords"]), len(dataByUrl)), dtype=object)
 
     count = 0
     for urlData in data:
         columns = []
-      
-        # arrayData = np.empty((len(urlData["keywords"]), len(urlData)), dtype=object)
+     
         arrayData = np.empty((len(urlData[0][1]), len(urlData)), dtype=object)
-            # arrayDynamic[:][:] = arrayData[:][:]
-            # count = count +1
-        for cols in range(len(urlData)):  #measurements
-            # print(urlData[cols])
+
+        for cols in range(len(urlData)):  
             columns.append(urlData[cols][0])
             for rows in range(len(urlData[cols][1])):
-            # for rows in range(len(keywords)):    #requisites
-                # print(urlData[cols][1][rows])
-                # arrayData[rows][cols] = urlData[cols][1][rows]
                 arrayData[rows][cols] = urlData[cols][1][rows]
+
         if (count != 0):
-            # con = np.concatenate((arrayData,arrayDynamic),axis=1)
             arrayDynamic = np.vstack((arrayDynamic, arrayData))
         if (count == 0):
             arrayDynamic = arrayData
             count = count +1
     return arrayDynamic, columns
-# def concatData(allData, dataWebsite):
-#     allData.append(dataWebsite)
+
 
 def exportXlsx(arrayData, columns, filename="data.xlsx" ):
     df = pd.DataFrame(arrayData, columns= columns)
@@ -53,7 +46,24 @@ def exportXlsx(arrayData, columns, filename="data.xlsx" ):
 
     print("Proccessed succesfully")
 
-def printDataframe(arrayData, columns):
+
+def dataframeFromArray(arrayData, columns):
     df = pd.DataFrame(arrayData, columns= columns)
-    print(df.to_markdown(tablefmt="grid"))
-    # print(df)
+    printDataframe(df)
+
+def dataframeFromList(listData, columnName=["No existen"]):
+    df = pd.DataFrame(listData, columns=columnName)
+    printDataframe(df)
+
+def printDataframe(dataframe):
+    print(tabulate(dataframe, headers='keys', tablefmt='psql', showindex=False))
+
+
+def dataframeToHTML(dataframe):
+    dataframe.to_html('temp.html', index=False, justify='center') 
+
+def printRequisites(arrayData, columns, noExistence):
+    print("Listado de requisitos encontrados:")
+    dataframeFromArray(arrayData, columns)
+    print("Listado de requisitos no encontrados:")
+    dataframeFromList(noExistence)
