@@ -39,7 +39,7 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                 onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
 
                 dataTrue["Menú"].append('transparencia')
-                dataTrue["Requisito"].append(requisite.keyword[0])
+                dataTrue["Requisitos"].append(requisite.keyword[0])
                 dataTrue["Existe"].append(onPage)
                 dataTrue["URL"].append(address)
                 dataTrue["Titulo"].append(title)
@@ -76,10 +76,11 @@ if __name__ == "__main__":
 
     # Compute all requisites
     dataTrue, dataFalse = computeRequisites(url, dataTrueTemplate, dataFalseTemplate, requisitesList)
+    browser.quit()
 
     # Get data and work with it
     # arrayData, columns = convertToArray(data, notData)
-    printRequisites(dataTrue, dataFalse)
+    dataTrueDf,dataFalseDf = printRequisites(dataTrue, dataFalse)
+    dataframeToHTML(dataTrueDf)
+    dataframeToHTML(dataFalseDf)
 
-
-    browser.quit()

@@ -51,10 +51,21 @@ def printDataframe(dataframe):
    
         
 def dataframeToHTML(dataframe):
-    dataframe.to_html('temp.html', index=False, justify='center') 
+    if len(dataframe.columns) > 1:
+        dataframe.to_html(dataframe.columns[1]+'.html', index=False, justify='center') 
+    else:
+        dataframe.to_html(dataframe.columns[0]+'.html', index=False, justify='center') 
+        
 
 def printRequisites(data, noExistence):
+
     print("Listado de requisitos encontrados:")
-    printDataframe(pd.DataFrame.from_dict(data))
+    data = pd.DataFrame.from_dict(data)
+    printDataframe(data)
+
+
     print("Listado de requisitos no encontrados:")
-    printDataframe(pd.DataFrame.from_dict(noExistence))
+    noExistence = pd.DataFrame.from_dict(noExistence)
+    printDataframe(noExistence)
+    
+    return data, noExistence
