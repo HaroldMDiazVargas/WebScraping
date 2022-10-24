@@ -1,5 +1,6 @@
 .vscode/
 classes/
+__pycache__/
 data.csv
 data.xlsx
 prueba.py
