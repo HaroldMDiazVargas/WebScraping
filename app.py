@@ -12,9 +12,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from startup.startup import dataFalseTemplate, dataTrueTemplate, requisitesList
 
-def computeRequisites(url, dataTrue, dataFalse, requisites ):
+def computeRequisites(url, dataTrue, dataFalse, dataCrossed, requisites ):
     initializeDict(dataTrue)
     initializeDict(dataFalse)
+    dataCrossed["Requisites"] = []
+    dataCrossed[url] = []
     browser.get(url + "transparencia")
     sleep(0.3) 
     soup = BeautifulSoup(browser.page_source, "html.parser")
@@ -23,9 +25,11 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
     print("Obteniendo los requisitos de: ", url)
     for requisite in tqdm(requisites):
         flagExistence = False
+        dataCrossed["Requisites"].append(requisite.keyword[0])
         for item in  accordionItems:
             if wordExists(requisite.keyword, item):
                 flagExistence = True
+                dataCrossed[url].append("-")
                 link = item.select_one("a").get("href")
                 if ("http") in link:
                     hrefLink = link
@@ -50,8 +54,9 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                 break
               
         if not flagExistence:
-            dataFalse["URL"].append(address)
-            dataFalse["Requisito"].append(requisite.keyword[0])
+            dataFalse["URL"].append(url)
+            dataFalse["Requisitos"].append(requisite.keyword[0])
+            dataCrossed[url].append("X")
 
     return dataTrue, dataFalse
     
@@ -76,6 +81,7 @@ if __name__ == "__main__":
 
 
     # # Initial settings
+    dataAditional = {}
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--start-maximized")
@@ -87,7 +93,7 @@ if __name__ == "__main__":
     dataTrueDfList = [] 
     dataFalseDfList = []
     for addr in urlList:
-        dataTrueFilled, dataFalseFilled = computeRequisites(addr, dataTrueTemplate, dataFalseTemplate, requisitesList)
+        dataTrueFilled, dataFalseFilled = computeRequisites(addr, dataTrueTemplate, dataFalseTemplate, dataAditional, requisitesList)
         dataTrueDf, dataFalseDf = printRequisites(dataTrueFilled, dataFalseFilled)
         dataTrueDfList.append(dataTrueDf)
         dataFalseDfList.append(dataFalseDf)
@@ -95,7 +101,7 @@ if __name__ == "__main__":
     ## Save in Excel
     dataframesToExcel(dataTrueDfList, "output/Requisitos.xlsx")
     dataframesToExcel(dataFalseDfList, "output/No existen.xlsx")
-
+    dictToExcel(dataAditional, "output/InfoAdicional.xlsx")
     # Close browser
     browser.quit()
 
