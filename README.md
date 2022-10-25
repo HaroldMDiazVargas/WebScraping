@@ -26,7 +26,7 @@ Put the .exe file in the direcory _C:/Windows/_
 
 ### Mac or Linux:
 
-Put the .exe file in the directory _local/bin/_
+Put the .exe file in the directory _/usr/local/bin/_
 
 ## App installation
 
