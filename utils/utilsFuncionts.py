@@ -56,13 +56,18 @@ def dataframeToHTML(dataframe):
     else:
         dataframe.to_html(dataframe.columns[0]+'.html', index=False, justify='center') 
         
+def dataframesToExcel(dataframeList, filename):
+    writer = pd.ExcelWriter(filename, engine='xlsxwriter')
+    for indx, dataframe in enumerate(dataframeList):
+          dataframe.to_excel(writer, sheet_name="url"+str(indx+1))
+    writer.close()
+   print("Archivo exportado satisfactoriamente en: ", filename)
 
 def printRequisites(data, noExistence):
 
     print("Listado de requisitos encontrados:")
     data = pd.DataFrame.from_dict(data)
     printDataframe(data)
-
 
     print("Listado de requisitos no encontrados:")
     noExistence = pd.DataFrame.from_dict(noExistence)
