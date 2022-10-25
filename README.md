@@ -16,6 +16,18 @@ This app requires to have installed Python
 ❯ python3
 ```
 
+## Chrome driver installation
+
+Download the corresponding [chrome driver](https://chromedriver.chromium.org/downloads) according Chrome version.
+
+### Windows:
+
+Put the .exe file in the direcory _C:/Windows/_
+
+### Mac or Linux:
+
+Put the .exe file in the directory _local/bin/_
+
 ## App installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install pipenv.

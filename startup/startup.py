@@ -30,7 +30,7 @@ dataFalseTemplate = {
 }
 
 requisitesList = [
-## Información de la entidad
+# Información de la entidad
 Deberes(keywordsDict["InfoEntidad"][0], MAX_CHARACTERS),
 Organigrama(keywordsDict["InfoEntidad"][1], MAX_CHARACTERS),
 cartasDescriptivas(keywordsDict["InfoEntidad"][2], MAX_CHARACTERS),

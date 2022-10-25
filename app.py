@@ -13,13 +13,13 @@ import sys
 
 
 def computeRequisites(url, dataTrue, dataFalse, requisites ):
-
+    
     browser.get(url + "transparencia")
-    sleep(5) 
+    sleep(1) 
     soup = BeautifulSoup(browser.page_source, "html.parser")
     accordionItems = soup.select(".accordion-item-text")
 
-    
+    print("Obteniendo los requisitos...")
     for requisite in requisites:
         flagExistence = False
         for item in accordionItems:
@@ -33,8 +33,8 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                     hrefLink = url+link
                     flagExternal = False
                 browser.get(hrefLink)
-                sleep(3)
-
+                sleep(1)
+                
                 childSoup = BeautifulSoup(browser.page_source, "html.parser")
                 onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
 
@@ -66,6 +66,7 @@ if __name__ == "__main__":
         url = "http://"+url if not "http" in url else url
         url =  url +'/' if url[-1] != "/" else url
         print("URL =", url)
+        
     
     # Initial settings
     # data = []

@@ -1,7 +1,7 @@
 
 InfoEntidad = [
     ['funciones y deberes'],                                                                                                                                #01
-    ['organigrama'],                                                                                                                                        #02 
+    ['organigrama', 'estructura orgánica'],                                                                                                                                        #02 
     ['mapas y cartas descriptivas de los procesos'],                                                                                                        #03
     ['directorio institucional'],                                                                                                                           #04
     ['información de servidores públicos', 'directorio de servidores públicos'],                                                                            #05
@@ -15,7 +15,7 @@ InfoEntidad = [
     ['publicación de hojas de vida'],                                                                                                                       #13
     ['servicio al público, normas, formularios y protocolos de atención', 'servicio al público, normas'],                                                   #14
 ]
- 
+  
 
 Normatividad = [
     ['normativa de la entidad', 'normatividad'],        #1                                                                                                         
