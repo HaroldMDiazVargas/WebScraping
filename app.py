@@ -4,25 +4,29 @@
  
 
 from utils.utilsFuncionts import *
-from selenium import webdriver
 from bs4 import BeautifulSoup
-from startup.startup import  requisitesList, dataTrueTemplate, dataFalseTemplate
 from time import sleep
 import sys
-
+from tqdm import tqdm
 
 
 def computeRequisites(url, dataTrue, dataFalse, requisites ):
     
     browser.get(url + "transparencia")
-    sleep(1) 
+    sleep(0.3) 
     soup = BeautifulSoup(browser.page_source, "html.parser")
     accordionItems = soup.select(".accordion-item-text")
 
     print("Obteniendo los requisitos...")
-    for requisite in requisites:
+    for requisite in tqdm(requisites):
+        # print(f"Requisito {requisite.keyword[0]}")
         flagExistence = False
-        for item in accordionItems:
+       
+        # for  item in enumerate(accordionItems):
+        for item in  accordionItems:
+            # print("hola")
+            # print((idx/len(accordionItems))*100)
+            # pbar.update((idx/len(accordionItems))*100)
             if wordExists(requisite.keyword, item):
                 flagExistence = True
                 link = item.select_one("a").get("href")
@@ -33,7 +37,7 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                     hrefLink = url+link
                     flagExternal = False
                 browser.get(hrefLink)
-                sleep(1)
+                sleep(0.3)
                 
                 childSoup = BeautifulSoup(browser.page_source, "html.parser")
                 onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
@@ -47,7 +51,7 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                 dataTrue["Última modificación"].append(date)
 
                 break
-
+              
         if not flagExistence:
             dataFalse["No existen"].append(requisite.keyword[0])
 
@@ -60,28 +64,37 @@ if __name__ == "__main__":
     sys.tracebacklimit = 0
     if len(sys.argv) == 1:
         print("USO: python app.py <url>")
+        print("USO: python app.py <url1> <url2> <url3> ...")
         raise ValueError("No se proporcionó ninguna URL")
-    else:
+    elif len(sys.argv) == 2:
         url = sys.argv[1]
         url = "http://"+url if not "http" in url else url
         url =  url +'/' if url[-1] != "/" else url
         print("URL =", url)
-        
+    else:
+        url = []
+        for indx, address in enumerate(sys.argv):
+            if(indx != 0):
+                url.append(address)
+
+
+
     
-    # Initial settings
-    # data = []
-    # noExistence = []
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    browser =  webdriver.Chrome(options=options)
+    # # Initial settings
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--start-maximized")
+    # chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    # browser =  webdriver.Chrome(options=chrome_options)
+ 
 
-    # Compute all requisites
-    dataTrue, dataFalse = computeRequisites(url, dataTrueTemplate, dataFalseTemplate, requisitesList)
-    browser.quit()
+    # # Compute all requisites
+    # dataTrue, dataFalse = computeRequisites(url, dataTrueTemplate, dataFalseTemplate, requisitesList)
+    # browser.quit()
 
-    # Get data and work with it
-    # arrayData, columns = convertToArray(data, notData)
-    dataTrueDf,dataFalseDf = printRequisites(dataTrue, dataFalse)
-    dataframeToHTML(dataTrueDf)
-    dataframeToHTML(dataFalseDf)
+    # # Get data and work with it
+    # # arrayData, columns = convertToArray(data, notData)
+    # dataTrueDf,dataFalseDf = printRequisites(dataTrue, dataFalse)
+    # dataframeToHTML(dataTrueDf)
+    # dataframeToHTML(dataFalseDf)
 
