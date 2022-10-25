@@ -8,25 +8,22 @@ from bs4 import BeautifulSoup
 from time import sleep
 import sys
 from tqdm import tqdm
-
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from startup.startup import dataFalseTemplate, dataTrueTemplate, requisitesList
 
 def computeRequisites(url, dataTrue, dataFalse, requisites ):
-    
+    initializeDict(dataTrue)
+    initializeDict(dataFalse)
     browser.get(url + "transparencia")
     sleep(0.3) 
     soup = BeautifulSoup(browser.page_source, "html.parser")
     accordionItems = soup.select(".accordion-item-text")
 
-    print("Obteniendo los requisitos...")
+    print("Obteniendo los requisitos de: ", url)
     for requisite in tqdm(requisites):
-        # print(f"Requisito {requisite.keyword[0]}")
         flagExistence = False
-       
-        # for  item in enumerate(accordionItems):
         for item in  accordionItems:
-            # print("hola")
-            # print((idx/len(accordionItems))*100)
-            # pbar.update((idx/len(accordionItems))*100)
             if wordExists(requisite.keyword, item):
                 flagExistence = True
                 link = item.select_one("a").get("href")
@@ -60,6 +57,8 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
     
 
 
+
+
 if __name__ == "__main__":
     sys.tracebacklimit = 0
     if len(sys.argv) == 1:
@@ -67,34 +66,35 @@ if __name__ == "__main__":
         print("USO: python app.py <url1> <url2> <url3> ...")
         raise ValueError("No se proporcionó ninguna URL")
     elif len(sys.argv) == 2:
-        url = sys.argv[1]
-        url = "http://"+url if not "http" in url else url
-        url =  url +'/' if url[-1] != "/" else url
-        print("URL =", url)
+        urlList = [formatUrl(sys.argv[1])]
     else:
-        url = []
-        for indx, address in enumerate(sys.argv):
+        urlList = []
+        for indx, addr in enumerate(sys.argv):
             if(indx != 0):
-                url.append(address)
+                urlList.append(formatUrl(addr))
 
 
-
-    
     # # Initial settings
-    # chrome_options = Options()
-    # chrome_options.add_argument("--headless")
-    # chrome_options.add_argument("--start-maximized")
-    # chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    # browser =  webdriver.Chrome(options=chrome_options)
- 
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    browser =  webdriver.Chrome(options=chrome_options)
 
-    # # Compute all requisites
-    # dataTrue, dataFalse = computeRequisites(url, dataTrueTemplate, dataFalseTemplate, requisitesList)
-    # browser.quit()
 
-    # # Get data and work with it
-    # # arrayData, columns = convertToArray(data, notData)
-    # dataTrueDf,dataFalseDf = printRequisites(dataTrue, dataFalse)
-    # dataframeToHTML(dataTrueDf)
-    # dataframeToHTML(dataFalseDf)
+    ## Compute & print all requisites in console
+    dataTrueDfList = [] 
+    dataFalseDfList = []
+    for addr in urlList:
+        dataTrueFilled, dataFalseFilled = computeRequisites(addr, dataTrueTemplate, dataFalseTemplate, requisitesList)
+        dataTrueDf, dataFalseDf = printRequisites(dataTrueFilled, dataFalseFilled)
+        dataTrueDfList.append(dataTrueDf)
+        dataFalseDfList.append(dataFalseDf)
+
+    ## Save in Excel
+    dataframesToExcel(dataTrueDfList, "output/Requisitos.xlsx")
+    dataframesToExcel(dataFalseDfList, "output/No existen.xlsx")
+
+    # Close browser
+    browser.quit()
 
