@@ -64,6 +64,15 @@ def dataframesToExcel(dataframeList, filename):
     writer.close()
     print("Archivo exportado satisfactoriamente: ", filename)
 
+def dictToExcel(dict, filename):
+    writer = pd.ExcelWriter(filename, engine='xlsxwriter')
+    dataframe = pd.DataFrame.from_dict(dict)
+    dataframe.to_excel(writer)
+    writer.close()
+    print("Archivo exportado satisfactoriamente: ", filename)
+
+
+
 def printRequisites(data, noExistence):
 
     print("Listado de requisitos encontrados:")
