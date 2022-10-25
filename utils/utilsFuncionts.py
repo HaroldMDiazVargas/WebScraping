@@ -1,4 +1,5 @@
 
+# pylint: disable=E0110
 import numpy as np
 import pandas as pd
 from tabulate import tabulate
@@ -61,7 +62,7 @@ def dataframesToExcel(dataframeList, filename):
     for indx, dataframe in enumerate(dataframeList):
           dataframe.to_excel(writer, sheet_name="url"+str(indx+1))
     writer.close()
-   print("Archivo exportado satisfactoriamente en: ", filename)
+    print("Archivo exportado satisfactoriamente: ", filename)
 
 def printRequisites(data, noExistence):
 
@@ -81,3 +82,7 @@ def formatUrl(url):
     url =  url +'/' if url[-1] != "/" else url
     return url
 
+def initializeDict(dict):
+    for key in dict.keys():
+        dict[key] = []
+    
