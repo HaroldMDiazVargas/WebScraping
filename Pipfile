@@ -11,6 +11,8 @@ numpy = "*"
 pandas = "*"
 openpyxl = "*"
 tabulate = "*"
+tqdm = "*"
+xlsxwriter = "*"
 
 [dev-packages]
 pylint = "*"
