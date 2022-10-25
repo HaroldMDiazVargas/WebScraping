@@ -50,7 +50,8 @@ def computeRequisites(url, dataTrue, dataFalse, requisites ):
                 break
               
         if not flagExistence:
-            dataFalse["No existen"].append(requisite.keyword[0])
+            dataFalse["URL"].append(address)
+            dataFalse["Requisito"].append(requisite.keyword[0])
 
     return dataTrue, dataFalse
     

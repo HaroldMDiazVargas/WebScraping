@@ -26,7 +26,8 @@ dataTrueTemplate = {
 }  
 
 dataFalseTemplate = {
-    "No existen": []
+    "URL": [],
+    "Requisitos": []
 }
 
 requisitesList = [
