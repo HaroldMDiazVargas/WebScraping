@@ -69,3 +69,10 @@ def printRequisites(data, noExistence):
     printDataframe(noExistence)
     
     return data, noExistence
+
+
+def formatUrl(url):
+    url = "http://"+url if not "http" in url else url
+    url =  url +'/' if url[-1] != "/" else url
+    return url
+
