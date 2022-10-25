@@ -51,7 +51,11 @@ To activate the Virtual Environment:
 ## Usage
 
 ```bash
-❯ python app.py URL
+❯ python app.py URL1
+```
+
+```bash
+❯ python app.py URL1 URL2 URL3 ...
 ```
 
 ## Examples
@@ -62,4 +66,10 @@ The next lines will have the same effect
 ❯ python app.py tunja-boyaca.gov.co
 ❯ python app.py www.tunja-boyaca.gov.co
 ❯ python app.py http://www.tunja-boyaca.gov.co
+```
+
+Passing multiple URLs:
+
+```bash
+❯ python app.py https://www.tunja-boyaca.gov.co www.castillalanueva-meta.gov.co
 ```
