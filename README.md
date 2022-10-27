@@ -18,7 +18,7 @@ This app requires to have installed Python
 
 ## Chrome driver installation
 
-Download the corresponding [chrome driver](https://chromedriver.chromium.org/downloads) according Chrome version.
+Download the corresponding [chrome driver](https://chromedriver.chromium.org/downloads) according Chrome version(chrome://version/).
 
 ### Windows:
 
