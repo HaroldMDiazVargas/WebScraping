@@ -79,7 +79,6 @@ if __name__ == "__main__":
             if(indx != 0):
                 urlList.append(formatUrl(addr))
 
-
     # # Initial settings
     dataAditional = {}
     chrome_options = Options()
