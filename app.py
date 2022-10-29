@@ -88,7 +88,6 @@ if __name__ == "__main__":
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     browser =  webdriver.Chrome(options=chrome_options)
 
-
     ## Compute & print all requisites in console
     dataTrueDfList = [] 
     dataFalseDfList = []
