@@ -3,7 +3,6 @@
 # pylint: disable=E0611
 # pylint: disable=E0602
 
- 
 
 from utils.utilsFuncionts import *
 from bs4 import BeautifulSoup
@@ -37,24 +36,19 @@ def computeRequisites(url, dataTrue, dataFalse, dataCrossed, requisites):
     menusText = getMenuItems(browser)
     print("Obteniendo los requisitos de: ", url)
 
-    # menusElements[0].click()
-    # sleep(0.3)
-    # soup = BeautifulSoup(browser.page_source, "html.parser")
+
     for pos, menu in enumerate(menusText):
         if menusTemplate[pos] in menu.lower():
             menuLink = browser.find_element(By.LINK_TEXT, menu)
             menuLink.click()
-            sleep(0.3)
-            if menusTemplate[pos] in requisitesMenus:
+            sleep(1)
+            if menusTemplate[pos] in requisites:
+                print("Menú "+ menusTemplate[pos])
                 soup = BeautifulSoup(browser.page_source, "html.parser")
-                requisitesParent = requisitesMenus[menusTemplate[pos]]
+                requisitesParent = requisites[menusTemplate[pos]]
                 dataTrue, dataFalse, dataCrossed = requisitesParent.computeMenu(url, soup, browser, dataTrue, dataFalse, dataCrossed) 
                 browser.get(url)
-                sleep(0.3)
-            # dataTrue.append(dataT)
-            # dataFalse.append(dataF)
-            # dataCrossed.append(dataC)
-
+                sleep(0.5)
     return dataTrue, dataFalse
 
     
