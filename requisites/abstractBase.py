@@ -4,7 +4,8 @@ from abc import ABC, abstractmethod
 from utils.utilsFuncionts import getTextData
 
 class Requisites(ABC):
-    def __init__(self, keyword, characters):
+    def __init__(self, menu, keyword, characters):
+        self.menu = menu
         self.keyword = keyword
         self.maxCharacters = characters
     
