@@ -26,7 +26,7 @@ class Transparencia():
                         hrefLink = url+link
                         flagExternal = False
                     browser.get(hrefLink)
-                    sleep(0.5)
+                    sleep(1)
                     
                     childSoup = BeautifulSoup(browser.page_source, "html.parser")
                     onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
