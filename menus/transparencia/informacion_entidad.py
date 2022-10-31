@@ -20,9 +20,13 @@ class Deberes(abstractBase.Requisites):
             return onPage, date, title, info[:self.maxCharacters], browser.current_url
 
         elif(soup.select_one(".content_text")):
+            # link = soup.select_one("a[href*='funciones-y-deberes']").get("href")
+
             dutiesLink = browser.find_element(By.CSS_SELECTOR, "a[href*='funciones-y-deberes']")
             dutiesLink.click()
-            sleep(3)
+            sleep(0.5)
+            
+            # WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "label[for='documentType-0']"))).click()
         redirectSoup = BeautifulSoup(browser.page_source, "html.parser")
 
         if(redirectSoup.select_one(".section-tit")): 
