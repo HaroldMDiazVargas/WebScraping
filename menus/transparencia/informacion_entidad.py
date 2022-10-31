@@ -24,7 +24,7 @@ class Deberes(abstractBase.Requisites):
 
             dutiesLink = browser.find_element(By.CSS_SELECTOR, "a[href*='funciones-y-deberes']")
             dutiesLink.click()
-            sleep(0.5)
+            sleep(1)
             
             # WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "label[for='documentType-0']"))).click()
         redirectSoup = BeautifulSoup(browser.page_source, "html.parser")
