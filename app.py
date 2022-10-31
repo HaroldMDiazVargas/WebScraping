@@ -1,64 +1,62 @@
 # pylint: disable=E0110
 # pylint: disable=E1121
 # pylint: disable=E0611
+# pylint: disable=E0602
+
  
 
 from utils.utilsFuncionts import *
 from bs4 import BeautifulSoup
 from time import sleep
 import sys
-from tqdm import tqdm
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from startup.startup import dataFalseTemplate, dataTrueTemplate, requisitesList
+from startup.startup import dataFalseTemplate, dataTrueTemplate, requisitesMenus
 
-def computeRequisites(url, dataTrue, dataFalse, dataCrossed, requisites ):
+def computeRequisites(url, dataTrue, dataFalse, dataCrossed, requisites):
     initializeDict(dataTrue)
     initializeDict(dataFalse)
     dataCrossed["Requisites"] = []
     dataCrossed[url] = []
-    browser.get(url + "transparencia")
-    sleep(0.3) 
+    menusTemplate = ["transparencia", "atención", "participa", "noticias", "normatividad"]
+
+    browser.get(url)
+    sleep(0.3)
     soup = BeautifulSoup(browser.page_source, "html.parser")
-    accordionItems = soup.select(".accordion-item-text")
-
+    
+    
+    if isAd(soup):
+        skipAd(browser)
+        sleep(0.3) 
+        soup = BeautifulSoup(browser.page_source, "html.parser")
+        
+    if not isMenu(soup) :
+        print("No existe la barra de navegación de: ", url)
+        return dataTrue, dataFalse
+    
+    menusText = getMenuItems(browser)
     print("Obteniendo los requisitos de: ", url)
-    for requisite in tqdm(requisites):
-        flagExistence = False
-        dataCrossed["Requisites"].append(requisite.keyword[0])
-        for item in  accordionItems:
-            if wordExists(requisite.keyword, item):
-                flagExistence = True
-                dataCrossed[url].append("-")
-                link = item.select_one("a").get("href")
-                if ("http") in link:
-                    hrefLink = link
-                    flagExternal = True
-                else:
-                    hrefLink = url+link
-                    flagExternal = False
-                browser.get(hrefLink)
+
+    # menusElements[0].click()
+    # sleep(0.3)
+    # soup = BeautifulSoup(browser.page_source, "html.parser")
+    for pos, menu in enumerate(menusText):
+        if menusTemplate[pos] in menu.lower():
+            menuLink = browser.find_element(By.LINK_TEXT, menu)
+            menuLink.click()
+            sleep(0.3)
+            if menusTemplate[pos] in requisitesMenus:
+                soup = BeautifulSoup(browser.page_source, "html.parser")
+                requisitesParent = requisitesMenus[menusTemplate[pos]]
+                dataTrue, dataFalse, dataCrossed = requisitesParent.computeMenu(url, soup, browser, dataTrue, dataFalse, dataCrossed) 
+                browser.get(url)
                 sleep(0.3)
-                
-                childSoup = BeautifulSoup(browser.page_source, "html.parser")
-                onPage, date, title, info, address = requisite.checkRequisites(childSoup, browser, flagExternal)
-
-                dataTrue["Menú"].append('transparencia')
-                dataTrue["Requisitos"].append(requisite.keyword[0])
-                dataTrue["Existe"].append(onPage)
-                dataTrue["URL"].append(address)
-                dataTrue["Titulo"].append(title)
-                dataTrue["Descripción"].append(info)
-                dataTrue["Última modificación"].append(date)
-
-                break
-              
-        if not flagExistence:
-            dataFalse["URL"].append(url)
-            dataFalse["Requisitos"].append(requisite.keyword[0])
-            dataCrossed[url].append("X")
+            # dataTrue.append(dataT)
+            # dataFalse.append(dataF)
+            # dataCrossed.append(dataC)
 
     return dataTrue, dataFalse
+
     
     
 
@@ -82,7 +80,7 @@ if __name__ == "__main__":
     # # Initial settings
     dataAditional = {}
     chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     browser =  webdriver.Chrome(options=chrome_options)
@@ -91,7 +89,7 @@ if __name__ == "__main__":
     dataTrueDfList = [] 
     dataFalseDfList = []
     for addr in urlList:
-        dataTrueFilled, dataFalseFilled = computeRequisites(addr, dataTrueTemplate, dataFalseTemplate, dataAditional, requisitesList)
+        dataTrueFilled, dataFalseFilled = computeRequisites(addr, dataTrueTemplate, dataFalseTemplate, dataAditional, requisitesMenus)
         dataTrueDf, dataFalseDf = printRequisites(dataTrueFilled, dataFalseFilled)
         dataTrueDfList.append(dataTrueDf)
         dataFalseDfList.append(dataFalseDf)
