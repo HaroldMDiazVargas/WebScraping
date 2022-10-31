@@ -3,7 +3,8 @@
 import numpy as np
 import pandas as pd
 from tabulate import tabulate
-
+from selenium.webdriver.common.by import By
+from time import sleep
 
 def wordExists(word, item):
     if (len(word) > 1):
@@ -12,6 +13,29 @@ def wordExists(word, item):
                 return True
     else:
         return word[0] in item.string.lower()
+
+def isAd(soup):
+    if(soup.select_one(".modal-wrap")):
+        return True
+    return False
+
+def skipAd(browser):
+    openAd = browser.find_element(By.CSS_SELECTOR, "button[ng-click='popupContent.close()']")
+    openAd.click()
+    sleep(3)
+
+def isMenu(soup):
+    if (soup.select_one(".menu-wrap")):
+        return True
+    return False
+
+def getMenuItems(browser):
+    menusText = []
+    dutiesLink = browser.find_elements(By.CSS_SELECTOR, ".nav-mainLink")
+    for menuEl in dutiesLink:
+        # menusText.append(menuEl.text.lower())
+        menusText.append(menuEl.text)
+    return menusText
 
 def getTextData(htmlItem):
     try:
