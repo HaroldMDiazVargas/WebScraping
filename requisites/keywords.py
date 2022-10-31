@@ -1,4 +1,6 @@
 
+
+
 InfoEntidad = [
     ['funciones y deberes'],                                                                                                                                #01
     ['organigrama', 'estructura orgánica'],                                                                                                                                        #02 
@@ -77,7 +79,28 @@ InfoTributaria = [
     ['tarifas de liquidación del impuesto de industria y comercio']         #2
 ]
 
-keywordsDict = {
+
+
+
+Atencion = [
+    ["atención"]
+]
+
+
+ParticipaMenu = [
+    ["participa"]
+]
+
+
+Noticias = [
+    ["noticias"]
+]
+
+NormatividadMenu = [
+    ["normatividad"]
+]
+
+keywordsTransparencia = {
     "InfoEntidad": InfoEntidad,
     "Normatividad": Normatividad,
     "Contratacion": Contratacion,
@@ -87,4 +110,29 @@ keywordsDict = {
     "DatosAbiertos": DatosAbiertos,
     "GrupoInteres": GrupoInteres,
     "InfoTributaria": InfoTributaria,
+    
+}
+
+keywordsAtencion = {
+    "Atención": Atencion
+}
+
+keywordsParticipa = {
+    "Participa":ParticipaMenu
+}
+keywordsNoticias = {
+    "Noticias": Noticias
+}
+
+keywordsNormatividad = {
+    "Normatividad": NormatividadMenu
+}
+
+keywordsDict = {
+
+    "Transparencia":keywordsTransparencia,
+    "Atención":keywordsAtencion,
+    "Participa":keywordsParticipa,
+    "Noticias":keywordsNoticias,
+    "Normatividad":keywordsNormatividad,
 }
