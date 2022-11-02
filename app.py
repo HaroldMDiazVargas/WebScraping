@@ -20,17 +20,18 @@ def computeRequisites(url, dataTrue, dataFalse, dataCrossed, requisites):
     menusTemplate = ["transparencia", "atención", "participa", "noticias", "normatividad"]
 
     browser.get(url)
-    sleep(0.3)
+    sleep(1)
     soup = BeautifulSoup(browser.page_source, "html.parser")
     
     
     if isAd(soup):
         skipAd(browser)
-        sleep(0.3) 
+        # sleep(1) 
         soup = BeautifulSoup(browser.page_source, "html.parser")
-        
+         
     if not isMenu(soup) :
         print("No existe la barra de navegación de: ", url)
+        initializeDataCrossed(dataFalse, dataCrossed, url)
         return dataTrue, dataFalse
     
     menusText = getMenuItems(browser)
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     # # Initial settings
     dataAditional = {}
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     browser =  webdriver.Chrome(options=chrome_options)

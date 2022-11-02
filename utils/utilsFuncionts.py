@@ -5,6 +5,7 @@ import pandas as pd
 from tabulate import tabulate
 from selenium.webdriver.common.by import By
 from time import sleep
+from requisites.keywords import keywordsDict
 
 def wordExists(word, item):
     if (len(word) > 1):
@@ -23,7 +24,7 @@ def skipAd(browser):
     openAd = browser.find_element(By.CSS_SELECTOR, "button[ng-click='popupContent.close()']")
     openAd.click()
     sleep(3)
-
+ 
 def isMenu(soup):
     if (soup.select_one(".menu-wrap")):
         return True
@@ -118,4 +119,14 @@ def formatUrl(url):
 def initializeDict(dict):
     for key in dict.keys():
         dict[key] = []
+    
+def initializeDataCrossed(dataFalse, dataCrossed, url):
+    for key in keywordsDict.keys():
+        for innerKey in keywordsDict[key].keys():
+            for singleKw in keywordsDict[key][innerKey]:
+                dataCrossed["Requisites"].append(singleKw[0])
+                dataCrossed[url].append("X")
+                dataFalse["Requisitos"].append(singleKw[0])
+                dataFalse["URL"].append(url)
+     
     
